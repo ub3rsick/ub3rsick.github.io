@@ -176,6 +176,10 @@ main()
 }
 ```
 Compile the c file and execute.
-image here
+![Running Egg Hunter](/assets/asn-3-egg-found.PNG)
 
+And we are done. Nice.
 
+This blog post has been created for completing the requirements of the [SLAE (Linux/x86)](http://securitytube-training.com/online-courses/securitytube-linux-assembly-expert/) certification.
+
+Student ID: **SLAE - 933**
