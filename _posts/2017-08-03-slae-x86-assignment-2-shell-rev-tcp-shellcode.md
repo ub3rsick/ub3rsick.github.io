@@ -433,3 +433,8 @@ Once again insert the shellcode in ```shellcode.c``` then compile the file. Now 
 
 ![Reverse Shell Network Machine](/assets/asn-2-connect-back-network-machine.PNG)
 
+And we are done :)
+
+This blog post has been created for completing the requirements of the [SLAE (Linux/x86)](http://securitytube-training.com/online-courses/securitytube-linux-assembly-expert/) certification.
+
+Student ID: **SLAE - 933**
