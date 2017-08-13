@@ -9,6 +9,7 @@ an “egg” – a short string signifying the beginning of a larger payload. Th
 usually include an error handling mechanism for dealing with access to non allocated memory
 ranges.
 
+<!-- more -->
 Often during exploit research, we may have control over a small amount of space, say 50 bytes. But in most cases, this much space is not  enough to accomodate a reverse shell or or bind shell. We may observe that a larger space is available somewhere else enough to accomodate a larger payload. But its location in memory is not known. Here is where egg hunters come in to play. A unique mark (EGG) is prepended before the shellcode and the egghunter will safely search the virtual address space for this egg. Once the egg is found the egghunter will jump to the larger payload followed by the egg.
 
 There is wonderful paper regarding egg hunter implementations on both Linux and Windows platforms - [Safely Searching Process Virtual Address Space](http://www.hick.org/code/skape/papers/egghunt-shellcode.pdf). I found this very comprehensive and easy to follow. For Linux, the author - Matt Miller (skape) - explains in detail 3 implementaions of egghunter, each with their Pros and Cons. I will be using the second implementation of egg hunter in the aforementioned paper.
