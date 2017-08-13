@@ -61,8 +61,8 @@ section .text
 	
 		next_page:
 			or dx,0xfff		; page alignment logic
-							; allows the hunting code to move up in PAGE SIZE
-                            ; increments vice doing in single byte increments.
+						; allows the hunting code to move up in PAGE SIZE
+                           			; increments vice doing in single byte increments.
 		
 			next_address:
 				inc edx
@@ -79,7 +79,7 @@ section .text
 				int 0x80
 
 				; if memory pointed by ebx is not accessible, 
-        	    ; then access() syscall returns value 0xfffffff2 (-14) EFAULT to EAX
+        	    		; then access() syscall returns value 0xfffffff2 (-14) EFAULT to EAX
 				; compare the lower bytes of EAX with 0xf2
 
 				cmp al,0xf2
@@ -93,16 +93,16 @@ section .text
         					; compare EAX with contents of memory pointed by EDI,
     						; EDI is incremented automatically by 4 bytes after SCASD (Even if scasd comparison are not equal)
 		jnz next_address	; EGG not found, got to next address in page
-		scasd				; Check for consecutive second appearance of EGG
+		scasd			; Check for consecutive second appearance of EGG
 		jnz next_address	; EGG not found, got to next address in page
-		jmp edi				; we found egg consecutively two times, now EDI  = EDX + 8 = start of shellcode, jump to it
+		jmp edi			; we found egg consecutively two times, now EDI  = EDX + 8 = start of shellcode, jump to it
 ```
 
 Assemble, Link the egghunter assembly file and Dump shellcode from the executable using ```objdump```. Later we will put this in a c file to test the egg hunter.
 ```
 // egg hunter shellcode
 // EGG : 0x50905090
-"\x31\xd2\x66\x81\xca\xff\x0f\x42\x8d\x5a\x04\x6a\x21\x58\xcd\x80\x3c\xf2\x74\xee\xb8\x90\x50\x90\x50\x89\xd7\xaf\x75\xe9\xaf\x75\xe6\xff\xe7
+"\x31\xd2\x66\x81\xca\xff\x0f\x42\x8d\x5a\x04\x6a\x21\x58\xcd\x80\x3c\xf2\x74\xee\xb8\x90\x50\x90\x50\x89\xd7\xaf\x75\xe9\xaf\x75\xe6\xff\xe7"
 ```
 The following assembly code prints the string "EGG IS FOUND" onto stdout.
 
@@ -146,7 +146,7 @@ Assemble, Link the above assembly code and Dump the shellcode from executable.
 "\x31\xc0\xb0\x04\x31\xdb\xb3\x01\x31\xc9\xeb\x0d\x59\x31\xd2\xb2\x0d\xcd\x80\x31\xc0\xb0\x01\xcd\x80\xe8\xee\xff\xff\xff\x45\x47\x47\x20\x49\x53\x20\x46\x4f\x55\x4e\x44\x0a";
 ```
 
-Insert the egg hunter shellcode and the shellcode to print "EGG IS FOUND" string to the following c file. Different shellcode payloads of different sizes can be used. The place where to put in shellcode is marked in the template file.
+Insert the egg hunter shellcode and the shellcode to print "EGG IS FOUND" to the following c file. Different shellcode payloads of different sizes can be used. The place where to put in shellcode is marked in the template file.
 ```c
 #include<stdio.h>
 #include<string.h>
@@ -166,11 +166,8 @@ unsigned char shellcode[] = \
 
 main()
 {
-
         printf("Egghunter Shellcode Length:  %d\n", strlen(egghunter));
-
         int (*ret)() = (int(*)())egghunter;
-
         ret();
 
 }
@@ -178,7 +175,7 @@ main()
 Compile the c file and execute.
 ![Running Egg Hunter](/assets/asn-3-egg-found.PNG)
 
-And we are done. Nice.
+We can now use larger shellcodes, just insert shellcode in the above c file and compile. And we are done. Nice. 
 
 This blog post has been created for completing the requirements of the [SLAE (Linux/x86)](http://securitytube-training.com/online-courses/securitytube-linux-assembly-expert/) certification.
 
