@@ -503,7 +503,7 @@ section .text
 		mov al, 0xb
 		int 0x80
 ```
-Compiling and linking assembly code.
+Assembling and linking assembly code.
 ```
 nasm -f elf32 shell-bind-tcp-x86.nasm -o shell-bind-tcp-x86.o
 ld shell-bind-tcp-x86.o -o shell-bind-tcp-x86
