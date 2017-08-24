@@ -23,18 +23,28 @@ Decoding the rotation is dead simple. During decoding we will rotate the whole s
 
 ### Additive XOR operation [XOR Kung Fu]
 
-Let our original shellcode be : A1, A2, A3, A4, A5. Then we can represent our encoded shellcode as : B1, B2, B3, B4, B5. Where each byte of the encoded shellcode is computed as follows
+Let our original shellcode be : A1, A2, A3, A4, A5. Then we can represent our encoded shellcode as : B1, B2, B3, B4, B5. Where each byte of the encoded shellcode is computed as follows:
+
 B1 = A1
+
 B2 = A1⊕A2 = B1⊕A2
+
 B3 = A1⊕A2⊕A3 = B2⊕A3
+
 B4 = A1⊕A2⊕A3⊕A4 = B3⊕A4
+
 B5 = A1⊕A2⊕A3⊕A4⊕A5 = B4⊕A5
 
 We can use the following operations to get back each byte of the shellcode from Additive XOR encoded shellcode.
+
 A1 = B1
+
 A2 = B2⊕B1 = (A1⊕A2) ⊕ A1 = A2
+
 A3 = B3⊕B2 = (A1⊕A2⊕A3) ⊕ (A1⊕A2) = A3
+
 A4 = B4⊕B3 = (A1⊕A2⊕A3⊕A4) ⊕ (A1⊕A2⊕A3) = A4
+
 A5 = B5⊕B4 = (A1⊕A2⊕A3⊕A4⊕A5) ⊕ (A1⊕A2⊕A3⊕A4) = A5
 
 ### XNRR3AX Encoder
@@ -109,9 +119,9 @@ print 'Encoded Opt_1 : ', encoded_shellcode2
 print 'Encoded Opt_2 : ', encoded_shellcode.rstrip(',')
 ```
 Lets run the encoder and produce the encoded shellcode.
-[image here]
+![XNRR3AX Encoder](/assets/asn-4-encoder-out.PNG)
 
-XNRR3AX Decoder
+### XNRR3AX Decoder
 Now that we have our encoder, we need to write a decoder stub which will decode the encoded shellcode and pass control to it. Let us look at the stages of decoding.
 1. Reverse the Additive XOR operation.
 2. Rotate to Left the whole shellcode 3 times.
@@ -215,7 +225,7 @@ section .text
 ```
 
 Assembling, Linking and Dumping shellcode.
-[image here]
+![Assemble Link Dump Shellcode](/assets/asn-4-asm-link-dump.PNG)
 
 Insert the shellcode in the c template file.
 ```c
