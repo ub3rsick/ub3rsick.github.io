@@ -254,7 +254,7 @@ After the decoding process, we can see the original Execve /bin/sh shellcode.
 Finally, Let us execute the our decoder executable to see if actually works or not.
 ![Running Decoder](/assets/asn-4-shellcode-exec.PNG)
 
-And we done :)
+And we are done :)
 
 This blog post has been created for completing the requirements of the [SLAE (Linux/x86)](http://securitytube-training.com/online-courses/securitytube-linux-assembly-expert/) certification.
 
