@@ -129,7 +129,7 @@ Now that we have our encoder, we need to write a decoder stub which will decode 
 4. Apply NOT operation on each byte of the shellcode.
 5. Jump to decoded shellcode.
 
-Without further ado, let us look the decode implementation.
+Without further ado, let us look at the decoder implementation.
 ```nasm
 ;
 ; Author 	: RIZAL MUHAMMED (UB3RSiCK)
