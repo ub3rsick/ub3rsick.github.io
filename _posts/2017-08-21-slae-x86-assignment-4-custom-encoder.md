@@ -3,7 +3,7 @@ layout: post
 title: SLAE Assignment 4 - Custom Encoder/Decoder (XNRR3AX)
 ---
 
-The fourth assignment is to create a custom shellcode encoder and decoder. The whole point of encoding shellcode is change its signature so that the shellcode is not detected by Antivirus softwares and Intrution Detection Systems. This is critical in most of real world exploitation scenarios where AV and IDS are present. The encoder will change the original shellcode into some other shellcode which in assembly might seem like meaningless instructions. Upon execution, the decoder stub present in the encoded shellcode will decode the encoded shellcode and once completed will jump to the decoded shellcode.
+The fourth assignment is to create a custom shellcode encoder and decoder. The whole point of encoding shellcode is change its signature so that the shellcode is not detected by Antivirus softwares and Intrution Detection Systems. This is critical in most of real world exploitation scenarios where AV and IDS are present. The encoder will change the original shellcode into some other shellcode which in assembly might seem like meaningless instructions. Upon execution, the decoder stub present before the encoded shellcode will decode the encoded shellcode and once completed will jump to the decoded shellcode.
 
 Here is how we are going to implement the encoder.
 1. XOR each byte of the original shellcode with 0xAA.
@@ -59,7 +59,7 @@ Below is the XNRR3AX encoder written in python which encodes the given shellcode
 from collections import deque
 import sys
 
-# Shellcode dumped from the execve /bin/bash
+# Shellcode dumped from the execve /bin/sh
 shellcode = ("\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x89\xe2\x53\x89\xe1\xb0\x0b\xcd\x80")
 
 # Insert bad characters in this list
