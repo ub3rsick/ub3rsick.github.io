@@ -232,7 +232,9 @@ _start:
 ```
 Let us test our polymorphic version.
 ![shellcode-848-poly-running](/assets/SLAE-x86/6.1-shellcode-848-poly-running.PNG)
+
 Original Shellcode 		: **83 bytes**
+
 Polymorphic version 	: **106 bytes (~27.8% increase)**
 ### #2 - Linux/x86 - sys_sethostname(PwNeD !!, 8) - 32 bytes
 The second shellcode changes the hostname to **"PwNed !!"**. The original shellcode can be found [here](http://shell-storm.org/shellcode/files/shellcode-622.php). For this one also we require root privileges to run successfully.
@@ -332,7 +334,9 @@ _start:
 Lets test our polymorphic version.
 ![shellcode-622-poly-running](/assets/SLAE-x86/6.2-shellcode-622-poly-running.PNG)
 The polymorphic shellcode works and is smaller than the original shellcode.
+
 Original Shellcode : **32 bytes**
+
 poymorphic Shellcode : **28 bytes (4 bytes smaller than original) - 12.5% decrease**
 
 ### #3 - Linux/x86 - mkdir() & exit() - 36 bytes
@@ -391,7 +395,9 @@ _start:
 ```
 Lets test the polymorphic version.
 ![shellcode-542-poly](/assets/SLAE-x86/6.3-shellcode-542-poly.PNG)
+
 Original Shellcode : **36 bytes**
+
 Polymorphic Shellcode :	**29 Bytes (7 bytes less than the original) - ~19.45% decrease**
 
 ### #4 - Linux/x86 - reads /etc/passwd and sends the content to 127.1.1.1 port 12345 - 111 bytes
@@ -636,7 +642,9 @@ _start:
 ```
 lets test our polymorphic shellcode.
 ![shellcode-861-poly](/assets/SLAE-x86/6.4-shellcode-861-poly.PNG)
+
 Original Shellcode : **111 bytes**
+
 Polymorphic Shellcode : **128 Bytes (~15.3% increase in shellcode size)**
 
 And we are done :)
