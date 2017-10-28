@@ -10,6 +10,8 @@ Our goal for this assignment is:
 - Can use any encryption scheme
 - Can use any programming language for implementation
 
+<!-- more -->
+
 ### Encryption Scheme - [RIJNDAEL-128-CBC]
 I decided to use existing encryption scheme **Rijndael-128-CBC**. Rijndael is a symmetric block cipher, designed by Joan Daemen and Vincent Rijmen, and was approved for the USA's NIST Advanced Encryption Standard, FIPS-197. The cipher has a variable block length and key length. Rijndael can be implemented very efficiently on a wide range of processors and in hardware. The design of Rijndael was strongly influenced by the design of the block cipher Square. There exist three versions of this algorithm, namely: RIJNDAEL-128 (the AES winner) , RIJNDAEL-192 , RIJNDAEL-256. The numerals 128, 192 and 256 stand for the length of the block size.
 
