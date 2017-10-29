@@ -649,6 +649,9 @@ Polymorphic Shellcode : **128 Bytes (~15.3% increase in shellcode size)**
 
 And we are done :)
 
-This blog post has been created for completing the requirements of the [SLAE (Linux/x86)](http://securitytube-training.com/online-courses/securitytube-linux-assembly-expert/) certification.
 
-Student ID: **SLAE - 933**
+This blog post has been created for completing the requirements of the SecurityTube Linux Assembly Expert certification:
+
+[http://www.securitytube-training.com/online-courses/securitytube-linux-assembly-expert/](http://www.securitytube-training.com/online-courses/securitytube-linux-assembly-expert/)
+
+Student ID: **SLAE-933**
