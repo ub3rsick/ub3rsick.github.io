@@ -153,8 +153,6 @@ section .text
 		shellcode_addr:
 			
 			pop esi				; pointer to shellcode 
-
-			; shift left 3 places the whole shellcode 
 			
 			xor eax, eax
 			xor ebx, ebx
