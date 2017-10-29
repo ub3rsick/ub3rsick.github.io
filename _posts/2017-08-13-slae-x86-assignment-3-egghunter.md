@@ -179,6 +179,8 @@ Compile the c file and execute.
 
 We can now use larger shellcodes, just insert shellcode in the above c file and compile. And we are done. Nice. 
 
-This blog post has been created for completing the requirements of the [SLAE (Linux/x86)](http://securitytube-training.com/online-courses/securitytube-linux-assembly-expert/) certification.
+This blog post has been created for completing the requirements of the SecurityTube Linux Assembly Expert certification:
 
-Student ID: **SLAE - 933**
+[http://www.securitytube-training.com/online-courses/securitytube-linux-assembly-expert/](http://www.securitytube-training.com/online-courses/securitytube-linux-assembly-expert/)
+
+Student ID: **SLAE-933**
