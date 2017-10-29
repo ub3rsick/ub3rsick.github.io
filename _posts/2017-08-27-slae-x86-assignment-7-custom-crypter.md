@@ -251,7 +251,8 @@ Lets see the Decrypter in action. Compiling and executing the Decrypter.
 
 And we are done :)
 
+This blog post has been created for completing the requirements of the SecurityTube Linux Assembly Expert certification:
 
-This blog post has been created for completing the requirements of the [SLAE (Linux/x86)](http://securitytube-training.com/online-courses/securitytube-linux-assembly-expert/) certification.
+[http://www.securitytube-training.com/online-courses/securitytube-linux-assembly-expert/](http://www.securitytube-training.com/online-courses/securitytube-linux-assembly-expert/)
 
-Student ID: **SLAE - 933**
+Student ID: **SLAE-933**
