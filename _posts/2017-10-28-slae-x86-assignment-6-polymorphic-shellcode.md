@@ -17,7 +17,7 @@ push 0xa
 pop eax
 ```
 There are other set of instructions also which will yeild the same result, but with different shellcode bytes. The objective of this assignment are as follows:
-- Create polymorphic version of 3 shellcodes from [shell-storm.org](www.shell-storm.org)
+- Create polymorphic version of 3 shellcodes from [shell-storm.org](http://www.shell-storm.org)
 - The polymorphic version should not be greater than **150%** of the original shellcode
 - Bonus points if the size of polymorphic shellcode is less than the original shellcode
 
