@@ -163,9 +163,9 @@ We will go through each assembly instruction and try to interpret the meaning.
 ```
 The CDQ (Convert Doubleword to Quadword) instruction extends the sign bit of EAX into the EDX register.
 ```
-00000001  6A0F              push byte +0xf				; PUSH 0xf onto stack
-00000003  58                pop eax						; Clears EAX and POPs the value 0xf into EAX; EAX = 0xf
-														; sys_chmod
+00000001  6A0F              push byte +0xf		; PUSH 0xf onto stack
+00000003  58                pop eax			; Clears EAX and POPs the value 0xf into EAX; EAX = 0xf
+							; sys_chmod
 ```
 Since `EAX=0xf`, we know which system call is going to be executed. The `SYS_CHMOD` system call. Before we proceed further, lets see which registers will be holding the parameters for the system call.
 ```
@@ -179,12 +179,12 @@ ECX = mode_t mode
 ```
 Lets continue analysing the assembly instructions.
 ```
-00000004  52                push edx					; EDX = 0x0 is PUSHed onto stack
+00000004  52                push edx			; EDX = 0x0 is PUSHed onto stack
 00000005  E80A000000        call dword 0x14
 ```
 Once the `call dword 0x14` instruction at `0x00000005` is executed, the five instructions from `0x0000000A` to `00000011` are skipped and seems useless. That does not make any sense, right?. Lets examine these instructions and their shellcode bytes.
 ```
-0000000A  2F                das							; '2F746D702F7562337200'.decode('hex') = '/tmp/ub3r\x00'
+0000000A  2F                das				; '2F746D702F7562337200'.decode('hex') = '/tmp/ub3r\x00'
 0000000B  746D              jz 0x7a
 0000000D  702F              jo 0x3e
 0000000F  7562              jnz 0x73
@@ -196,13 +196,13 @@ python -c "print '2F746D702F7562337200'.decode('hex')"
 ```
 So when the `call dword 0x14` instruction is executed, the address of instruction next to it is pushed onto the stack. we already know that this is nothing but the address pointing to the filename.
 ```
-00000014  5B                pop ebx					; ebx = address pointing to filename = '/tmp/ub3r' null terminated
+00000014  5B                pop ebx			; ebx = address pointing to filename = '/tmp/ub3r' null terminated
 00000015  6880010000        push dword 0x180		; permission in octal; 0x180 = 0600 octal
-0000001A  59                pop ecx					; ecx = 0600
-0000001B  CD80              int 0x80				; execute the sys_chmod system call
+0000001A  59                pop ecx			; ecx = 0600
+0000001B  CD80              int 0x80			; execute the sys_chmod system call
 0000001D  6A01              push byte +0x1
-0000001F  58                pop eax					; EAX = 0x1 = exit systemcall
-00000020  CD80              int 0x80				; execute exit system call
+0000001F  58                pop eax			; EAX = 0x1 = exit systemcall
+00000020  CD80              int 0x80			; execute exit system call
 ```
 ### #3. READ_FILE - linux/x86/read_file - [NDISASM]
 The `linux/x86/read_file` reads up to 4096 bytes from the local file system and write it back out to the specified file descriptor. Lets look at the payload options.
@@ -271,7 +271,7 @@ The NULL byte at `0x00000048` acts as null terminator for the filname string. On
 #### Open file in O_RDONLY - int open(const char *pathname, int flags);
 ```
 00000002  B805000000        mov eax,0x5			; eax = 0x5 ; sys_open
-00000007  5B                pop ebx				; ebx = /etc/passwd address ; const char __user *filename
+00000007  5B                pop ebx			; ebx = /etc/passwd address ; const char __user *filename
 00000008  31C9              xor ecx,ecx			; ecx = 0 ; int flags
 0000000A  CD80              int 0x80			; execute sys_open
 ```
