@@ -7,7 +7,7 @@ Metasploit is an awesome penetration testing software which a large number of ex
 
 <!-- more -->
 
-[Image  here]
+![asn-5-linux-x86-payloads](/assets/SLAE-x86/asn-5/asn-5-linux-x86-payloads.PNG)
 
 As we can see, Metasploit provides an exhaustive list of payloads for linux/x86 alone. I have chosen to analyze the following three payloads.
 1. EXEC - linux/x86/exec
@@ -111,9 +111,13 @@ Now we see the `int 0x80` instruction which will actually call the system call. 
 ![asn-5-exec-gdb-05-execve-call](/assets/SLAE-x86/asn-5/asn-5-exec-gdb-05-execve-call.PNG)
 
 EAX = 0xb = execve()
+
 EBX = Pointer to the filename of the file to be executed - "/bin/sh"
+
 ECX = Pointer to argv
+
 EDX = envp = NULL
+
 
 ### #2. CHMOD - linux/x86/chmod - [NDISASM]
 The `linux/x86/chmod` runs chmod on specified file with specified mode. The chmod command is used to set permission of files. Let us look at the msfvenom payload options.
@@ -165,9 +169,13 @@ The CDQ (Convert Doubleword to Quadword) instruction extends the sign bit of EAX
 ```
 Since `EAX=0xf`, we know which system call is going to be executed. The `SYS_CHMOD` system call. Before we proceed further, lets see which registers will be holding the parameters for the system call.
 ```
+
 EAX = 0x0f = sys_chmod
+
 EBX = const char __user *filename = Pointer to the filename
+
 ECX = mode_t mode
+
 ```
 Lets continue analysing the assembly instructions.
 ```
@@ -269,9 +277,13 @@ The NULL byte at `0x00000048` acts as null terminator for the filname string. On
 ```
 Lets try to understand which system call is being called in the above snippet. For that we will look at the register values.
 
+
 EAX = 0x5	; sys_open system call
+
 EBX = argument 1 for open; 	The address pointing to the filename(`/etc/passwd`)
+
 ECX = argument 2 for open;	0		; O_RDONLY
+
 
 So the **sys_open** system call is being called and the arguments for the open system call are stored in EBX and ECX. Once the sys_open system call is successfully executed, EAX will have the file descriptor returned by the system call.
 
@@ -287,10 +299,15 @@ So the **sys_open** system call is being called and the arguments for the open s
 ```
 Lets examine the register values.
 
+
 EAX = 0x3	; sys_read
+
 EBX = argument 1 for read; open file descriptor
+
 ECX = argument 2 for read; address pointing to the top of stack
+
 EDX = argument 3 for read; 0x1000 = 4096
+
 
 The **sys_read** system call is invoked, the arguments for the system call are stored in EBX, ECX and EDX. The above snippet reads upto 4096 bytes from the open file pointed by file descriptor in EBX and stores in buffer pointed ECX. Once the system call is executed successfully, the file contents will be stored on stack and the number of bytes read is returned to EAX.
 
@@ -303,10 +320,15 @@ The **sys_read** system call is invoked, the arguments for the system call are s
 ```
 Lets examine the registers.
 
+
 EAX = 0X4 ; sys_write system call
+
 EBX = argument 1 for write; 0x1; write to stdout
+
 ECX = argument 2 for write; *buf; address pointing to the top of stack
+
 EDX = argument 2 for write; how many bytes to write
+
 
 The **sys_write** system call is invoked. Once executed successfully, the file contents in the buffer and written to the stdout.
 
