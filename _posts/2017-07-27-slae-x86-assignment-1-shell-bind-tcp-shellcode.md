@@ -14,6 +14,9 @@ it on your blog. Also, store the source code and all other helper scripts that
 you have used in your GitHub account.
 
 <!-- more -->
+
+The source code of all the files I have written for completing the assignments are available in my [GitHub](https://github.com/ub3rsick/SLAE-x86-Assignments) account.
+
 ### Assignment \#1: Shell Bind TCP Shellcode (Linux/x86)
 
 The following are the criteria:
