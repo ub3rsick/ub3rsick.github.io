@@ -110,6 +110,8 @@ Now we see the `int 0x80` instruction which will actually call the system call. 
 
 ![asn-5-exec-gdb-05-execve-call](/assets/SLAE-x86/asn-5/asn-5-exec-gdb-05-execve-call.PNG)
 
+The `int 0x80` instruction at `0x0804a064` invokes the execve system call with the required parameters. The register layout just before the system call is as follows.
+
 EAX = 0xb = execve()
 
 EBX = Pointer to the filename of the file to be executed - "/bin/sh"
@@ -117,6 +119,8 @@ EBX = Pointer to the filename of the file to be executed - "/bin/sh"
 ECX = Pointer to argv
 
 EDX = envp = NULL
+
+Once the execve system call is completed, there is no need for another exit system call. This is because execve() does not return on success, and the text, data, bss, and stack of the calling process are overwritten by that of the program loaded.
 
 
 ### #2. CHMOD - linux/x86/chmod - [NDISASM]
@@ -194,7 +198,7 @@ The shellcode bytes corresponding to these five instrcution is `2F746D702F756233
 ```python
 python -c "print '2F746D702F7562337200'.decode('hex')"
 ```
-So when the `call dword 0x14` instruction is executed, the address of instruction next to it is pushed onto the stack. we already know that this is nothing but the address pointing to the filename.
+So when the `call dword 0x14` instruction is executed, the address of instruction next to it is pushed onto the stack. we already know that this is nothing but the address pointing to the filename. Now let us examine the rest of the shellcode.
 ```
 00000014  5B                pop ebx			; ebx = address pointing to filename = '/tmp/ub3r' null terminated
 00000015  6880010000        push dword 0x180		; permission in octal; 0x180 = 0600 octal
@@ -204,6 +208,8 @@ So when the `call dword 0x14` instruction is executed, the address of instructio
 0000001F  58                pop eax			; EAX = 0x1 = exit systemcall
 00000020  CD80              int 0x80			; execute exit system call
 ```
+The `int 0x80` at `0000001B` executes the sys_chmod system call. The arguments for the system call are stored in ebx and ecx. The rest of the shellcode from `0x0000001D` to `0x00000020` is to call exit system call.
+
 ### #3. READ_FILE - linux/x86/read_file - [NDISASM]
 The `linux/x86/read_file` reads up to 4096 bytes from the local file system and write it back out to the specified file descriptor. Lets look at the payload options.
 
@@ -248,7 +254,7 @@ Lets analyze the assembly code line by line. We will analyze the instructions fr
 
 ```
 00000000  EB36              jmp short 0x38
-		..........................
+	..........................
         <0x00000002 to 0x00000036>
         ..........................
 00000038  E8C5FFFFFF        call dword 0x2
