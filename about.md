@@ -8,6 +8,7 @@ Hello. My name is Rizal and since you are here, you may probably know me by the 
 * Programmer
 * Researcher
 * Gamer
-* Football Player
 
-I'm an [OSCP](https://www.offensive-security.com/information-security-training/penetration-testing-training-kali-linux/) certified professional, which means I do try harder. In my free time I like to pwn virtual machines from [VulnHub](https://www.vulnhub.com/) or you can find me playing games on my PC.
+I'm an [OSCE](https://www.offensive-security.com/information-security-training/cracking-the-perimeter/), [OSCP](https://www.offensive-security.com/information-security-training/penetration-testing-training-kali-linux/) certified professional, which means I do try harder. In my free time i like to do following things.
+* pwn virtual machines from [VulnHub](https://www.vulnhub.com/)
+* Learn new things
