@@ -5,7 +5,7 @@ title: OverTheWire - Bandit
 
 The Bandit wargame is aimed at absolute beginners. It will teach the basics needed to be able to play other wargames.
 
-<!--more-->
+<!-- more -->
 
 ## Level 0
 he goal of this level is for you to log into the game using SSH. The host to which you need to connect is **bandit.labs.overthewire.org**, on port **2220**. The username is **bandit0** and the password is **bandit0**.
