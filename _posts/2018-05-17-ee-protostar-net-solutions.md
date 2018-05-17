@@ -1,12 +1,21 @@
 ---
 type: post
-title: Exploit Exercise Protostar - Net 0-3 Solution
+title: Exploit Exercises Protostar - Net 0-3 Solution
 ---
+
+[Protostar](https://exploit-exercises.com/protostar/) introduces the following in a friendly way:
+
+-    Network programming
+-    Byte order
+-    Handling sockets
+-    Stack overflows
+-    Format strings
+-    Heap overflows
+
+<!-- more -->
 
 ### Net0
 This level takes a look at converting strings to little endian integers. This level is at **/opt/protostar/bin/net0**
-
-<!-- more -->
 
 #### Source Code
 ```c
