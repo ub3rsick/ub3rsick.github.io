@@ -104,7 +104,7 @@ AndroidTamer4 comes with drozer preconfigured. VM can be downloaded from
 3. Once installation finishes, drozer command will be available.
 
 ### Install drozer-agent apk in android device.
-- Download latest agent apk from [here](https://github.com/mwrlabs/drozer/releases/).
+Download latest agent apk from [here](https://github.com/mwrlabs/drozer/releases/) and install on the android device with the below command.
 
 `adb install drozer-agent-2.x.x.apk`
 
