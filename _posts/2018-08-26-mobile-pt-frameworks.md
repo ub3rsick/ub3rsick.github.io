@@ -7,9 +7,10 @@ title: Setting up PASSIONFRUIT, OBJECTION and DROZER
 ## Setting up passionfruit
 1. Install pre-requisite nodejs for respective os from https://nodejs.org/en/
 2. Clone [Passionfruit](https://github.com/chaitin/passionfruit) to desktop or desired path.
-
-**`git clone https://github.com/chaitin/passionfruit.git`**
-
+**
+```git clone https://github.com/chaitin/passionfruit.git
+```
+**
 or download zip file through browser and extract.
 3. Open the terminal and cd into the passionfruit directory.
 4. To install npm dependencies and build the frontend, run the following command.
