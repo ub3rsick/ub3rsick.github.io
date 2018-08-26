@@ -108,10 +108,10 @@ Download latest agent apk from [here](https://github.com/mwrlabs/drozer/releases
 
 `adb install drozer-agent-2.x.x.apk`
 
-Now you have everything to analyze apps with drozer.
+ Now you have everything to analyze apps with drozer.
 
-Analyzing apps with drozer.
-1. open drozer client app on android device and click to start server. (default port 31415, can be changed)
+## Analyzing apps with drozer.
+1. Open drozer agent app on android device and click to start server. (default port 31415, can be changed)
 2. Connect android device with USB debugging enabled on to host machine via usb.
 3. setup port forward with adb.
 `adb forward tcp:31415 tcp:31415`
