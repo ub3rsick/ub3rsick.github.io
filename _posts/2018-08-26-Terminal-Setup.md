@@ -3,6 +3,10 @@ layout: post
 title: Terminal Setup
 ---
 
+The terminal emulator and themes I use in my virtual machines.
+
+<!-- more -->
+
 ## Kali VM
 
 - Terminal - **Tilix**
