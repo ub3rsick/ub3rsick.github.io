@@ -30,6 +30,7 @@ title: Terminal Setup
 		- `./install.sh`
 		- or `sudo apt-get install fonts-powerline`
 
+![Kali Terminal](/assets/term-setup/kali-setup.PNG)
 
 ## MacOS/OSX Setup
 
@@ -48,3 +49,4 @@ title: Terminal Setup
 	- Set font **Meslo LG L for powerline** in iTerm2.
 	- Uncheck **use different font for non-ASCII text**
 
+![OSX Terminal](/assets/term-setup/mac-os-setup.PNG)
