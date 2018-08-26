@@ -7,15 +7,23 @@ title: Setting up PASSIONFRUIT, OBJECTION and DROZER
 ## Setting up passionfruit
 1. Install pre-requisite nodejs for respective os from https://nodejs.org/en/
 2. Clone [Passionfruit](https://github.com/chaitin/passionfruit) to desktop or desired path.
-	**`git clone https://github.com/chaitin/passionfruit.git`**
-	or download zip file through browser and extract.
+
+**`git clone https://github.com/chaitin/passionfruit.git`**
+
+or download zip file through browser and extract.
 3. Open the terminal and cd into the passionfruit directory.
 4. To install npm dependencies and build the frontend, run the following command.
-	**`npm install`**
+
+**`npm install`**
+
 5. To build the bundle run below command
-	**`npm run build`**
+
+**`npm run build`**
+
 6. Start server using below command
-	**`npm start`**
+
+**`npm start`**
+
 7. Open **http://localhost:31337** in browser to access the passionfruit web ui.
 8. Connect your iDevice (which has frida-server running in background) to your pc or mac via USB.
 
@@ -65,19 +73,23 @@ Useful objection commands and wiki - https://github.com/sensepost/objection/wiki
 AndroidTamer4 comes with drozer preconfigured. VM can be downloaded from
 [here](https://androidtamer.com/tamer4-release). or  if you want to configure drozer on your linux machine follow the below steps.
 1. Building Python wheel
+	
 	**`git clone https://github.com/mwrlabs/drozer.git`**
 	**`cd drozer`**
 	**`python setup.py bdist_wheel`**
 
 2. Installing Python wheel
+
 **`sudo pip install drozer-2.x.x-py2-none-any.whl`**
+
 **Note:** The file name drozer-2.x.x-py2-none-any.whl might be different, the x.x number might be different. The file will be in bdist directory.
 
 3. Once installation finishes, drozer command will be available.
 
 ### Install drozer-agent apk in android device.
 - Download latest agent apk from [here](https://github.com/mwrlabs/drozer/releases/).
-	**`adb install drozer-agent-2.x.x.apk`**
+
+**`adb install drozer-agent-2.x.x.apk`**
 
 Now you have everything to analyze apps with drozer.
 
@@ -85,7 +97,11 @@ Analyzing apps with drozer.
 1. open drozer client app on android device and click to start server. (default port 31415, can be changed)
 2. Connect android device with USB debugging enabled on to host machine via usb.
 3. setup port forward with adb.
-	**`adb forward tcp:31415 tcp:31415`**
+
+**`adb forward tcp:31415 tcp:31415`**
+
 4. Connect to drozer console.
-	**`drozer console connect`**
+
+**`drozer console connect`**
+
 5. Now you are in drozer CLI.
