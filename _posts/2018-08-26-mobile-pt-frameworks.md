@@ -44,7 +44,7 @@ Require frida-server running on the jailbroken device
 
 Install pre-requisite frida on host machine (OSX/Linux) with:
 	
-	**`sudo pip install frida`**
+**`sudo pip install frida`**
 	
 Its better to install objection in a virtual environment.
 1. Clone [Objection Github Repo](https://github.com/sensepost/objection/)
@@ -88,9 +88,11 @@ AndroidTamer4 comes with drozer preconfigured. VM can be downloaded from
 [here](https://androidtamer.com/tamer4-release). or  if you want to configure drozer on your linux machine follow the below steps.
 1. Building Python wheel
 	
-	**`git clone https://github.com/mwrlabs/drozer.git`**
-	**`cd drozer`**
-	**`python setup.py bdist_wheel`**
+**`git clone https://github.com/mwrlabs/drozer.git`**
+	
+**`cd drozer`**
+
+**`python setup.py bdist_wheel`**
 
 2. Installing Python wheel
 
