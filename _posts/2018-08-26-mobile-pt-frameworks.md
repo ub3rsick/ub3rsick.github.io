@@ -64,7 +64,8 @@ Its better to install objection in a virtual environment.
 5. Next, start the installation using pip3 with:
 	
 	**`pip3 install -U objection`**
-	Once the dependencies are installed, the objection command should be available in your PATH.
+	
+Once the dependencies are installed, the objection command should be available in your PATH.
 
 To start analysing an app with objection, follow below steps.
 1. activate objection virtualenv by running:
@@ -88,15 +89,15 @@ AndroidTamer4 comes with drozer preconfigured. VM can be downloaded from
 [here](https://androidtamer.com/tamer4-release). or  if you want to configure drozer on your linux machine follow the below steps.
 1. Building Python wheel
 	
-**`git clone https://github.com/mwrlabs/drozer.git`**
+	**`git clone https://github.com/mwrlabs/drozer.git`**
 	
-**`cd drozer`**
+	**`cd drozer`**
 
-**`python setup.py bdist_wheel`**
+	**`python setup.py bdist_wheel`**
 
 2. Installing Python wheel
 
-**`sudo pip install drozer-2.x.x-py2-none-any.whl`**
+	**`sudo pip install drozer-2.x.x-py2-none-any.whl`**
 
 **Note:** The file name drozer-2.x.x-py2-none-any.whl might be different, the x.x number might be different. The file will be in bdist directory.
 
