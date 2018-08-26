@@ -3,6 +3,9 @@ layout: post
 title: Passionfruit, Objection and Drozer
 ---
 
+Setup instructions for mobile application assessment frameworks Passionfruit, Objection and Drozer.
+
+<!-- more -->
 
 ## Setting up passionfruit
 1. Install pre-requisite nodejs for respective os from https://nodejs.org/en/
