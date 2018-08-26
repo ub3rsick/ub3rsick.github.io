@@ -7,22 +7,15 @@ title: Setting up PASSIONFRUIT, OBJECTION and DROZER
 ## Setting up passionfruit
 1. Install pre-requisite nodejs for respective os from https://nodejs.org/en/
 2. Clone [Passionfruit](https://github.com/chaitin/passionfruit) to desktop or desired path.
-**```git clone https://github.com/chaitin/passionfruit.git
-```**
+**```git clone https://github.com/chaitin/passionfruit.git```**
 or download zip file through browser and extract.
 3. Open the terminal and cd into the passionfruit directory.
 4. To install npm dependencies and build the frontend, run the following command.
-
-**`npm install`**
-
+	**`npm install`**
 5. To build the bundle run below command
-
-**`npm run build`**
-
+	**`npm run build`**
 6. Start server using below command
-
-**`npm start`**
-
+	**`npm start`**
 7. Open **http://localhost:31337** in browser to access the passionfruit web ui.
 8. Connect your iDevice (which has frida-server running in background) to your pc or mac via USB.
 
@@ -40,7 +33,6 @@ Require frida-server running on the jailbroken device
 
 Install pre-requisite frida on host machine (OSX/Linux) with:
 	**`sudo pip install frida`**
-
 Its better to install objection in a virtual environment.
 1. Clone [Objection Github Repo](https://github.com/sensepost/objection/)
 2. Install virtualenv
@@ -96,11 +88,7 @@ Analyzing apps with drozer.
 1. open drozer client app on android device and click to start server. (default port 31415, can be changed)
 2. Connect android device with USB debugging enabled on to host machine via usb.
 3. setup port forward with adb.
-
 **`adb forward tcp:31415 tcp:31415`**
-
 4. Connect to drozer console.
-
 **`drozer console connect`**
-
 5. Now you are in drozer CLI.
