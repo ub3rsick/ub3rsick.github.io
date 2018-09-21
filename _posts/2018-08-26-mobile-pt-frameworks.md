@@ -52,9 +52,12 @@ Require frida-server running on the jailbroken device
 
 ## Setting up Objection
 
-Install pre-requisite frida on host machine (OSX/Linux) with:
+Install pre-requisite frida and frida-tools on host machine (OSX/Linux) with:
 	
-`sudo pip install frida`
+```
+pip install frida-tools # CLI tools
+pip install frida       # Python bindings
+```
 	
 Its better to install objection in a virtual environment.
 1. Clone [Objection Github Repo](https://github.com/sensepost/objection/)
