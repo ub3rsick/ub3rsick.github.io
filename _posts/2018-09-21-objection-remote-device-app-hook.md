@@ -30,6 +30,7 @@ Enter iDevice root password and leave the terminal as is.
 
 #### List applications running on device
 Make sure frida-tools is upto date on the pc/MAC.
+
 List running applications : **```frida-ps -R```**
 
 ##### Sample Output
