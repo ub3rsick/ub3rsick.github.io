@@ -74,7 +74,12 @@ com.reddit.Reddit on (iPhone: 11.3.1) [net] #
 ```
 
 ## Application running on remote Android (rooted) device
+
 ### Install frida-server on Android device
+Connect to remote device with ADB.
+
+**`adb connect <android_device_ip>`**
+
 Go to frida [releases](https://github.com/frida/frida/releases) page and get the **frida-server** binary for android. Push it onto android device and set appropriate permissions.
 
 **`adb push frida-server /data/local/tmp/ `**
@@ -85,10 +90,6 @@ Run frida-server on android device.
 
 **`adb shell "/data/local/tmp/frida-server &"`**
 
-
-#### Connect to remote device with ADB.
-
-**`adb connect <android_device_ip>`**
 
 #### Port forward local port 27042 to remote port 27042
 
