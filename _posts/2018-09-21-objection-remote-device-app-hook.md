@@ -2,14 +2,15 @@
 layout: post
 title: (Objection) Mobile apps on remote device
 ---
+This post describes how to hook applications running on a remote device (iOS/Android) using Objection. Describes how to setup port forwarding.
+
+<!-- more -->
 
 ## Installing frida-tools (CLI tools) on Linux/Mac
 Use the following commands to install frida-tools.
 **```pip install frida-tools```**
 If **frida-tools** already installed and wants to update to latest version.
 **```pip install frida-tools --upgrade```**
-
-<!-- more -->
 
 ## Application running on Remote iOS (jailbroken) device
 ### Install Frida (frida-server) on iDevice
