@@ -95,8 +95,10 @@ Run frida-server on android device.
 
 **`adb forward tcp:27042 tcp:27042`**
 >If port forwarding is not setup, the following error will come up.
-(objection-py3env) android@tamer:~$ frida-ps -R 
-Failed to enumerate processes: unable to connect to remote frida-server
+
+>(objection-py3env) android@tamer:~$ frida-ps -R 
+
+>Failed to enumerate processes: unable to connect to remote frida-server
 
 ##### Sample output once port forward is setup
 ```
