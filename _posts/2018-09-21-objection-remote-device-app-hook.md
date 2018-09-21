@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Objection Inspecting mobile apps on remote device
+title: [Objection] Mobile apps on remote device
 ---
 
 ## Installing frida-tools (CLI tools) on Linux/Mac
