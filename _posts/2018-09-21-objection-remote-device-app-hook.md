@@ -8,8 +8,11 @@ This post describes how to hook applications running on a remote device (iOS/And
 
 ## Installing frida-tools (CLI tools) on Linux/Mac
 Use the following commands to install frida-tools.
+
 **```pip install frida-tools```**
+
 If **frida-tools** already installed and wants to update to latest version.
+
 **```pip install frida-tools --upgrade```**
 
 ## Application running on Remote iOS (jailbroken) device
@@ -74,6 +77,7 @@ com.reddit.Reddit on (iPhone: 11.3.1) [net] #
 Go to frida [releases](https://github.com/frida/frida/releases) page and get the **frida-server** binary for android. Push it onto android device and set appropriate permissions.
 
 **`adb push frida-server /data/local/tmp/ `**
+
 **`adb shell "chmod 755 /data/local/tmp/frida-server"`**
 
 Run frida-server on android device.
