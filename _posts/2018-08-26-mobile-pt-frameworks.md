@@ -9,11 +9,11 @@ Setup instructions for mobile application assessment frameworks Passionfruit, Ob
 
 ## Setting up passionfruit
 
-Update from official repo:
-> Passionfruit is now avaliable on npm, so just type following command to install:
-  **npm install -g passionfruit**
+**Update from official repo:**
+Passionfruit is now avaliable on npm, so just type following command to install:
+**```npm install -g passionfruit```**
 
-Old instructions:
+**Old instructions:**
 1. Install pre-requisite nodejs for respective os from https://nodejs.org/en/
 2. Clone [Passionfruit](https://github.com/chaitin/passionfruit) to desktop or desired path.
 
