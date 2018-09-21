@@ -16,7 +16,7 @@ If **frida-tools** already installed and wants to update to latest version.
 **```pip install frida-tools --upgrade```**
 
 ## Application running on Remote iOS (jailbroken) device
-### Install Frida (frida-server) on iDevice
+#### Install Frida (frida-server) on iDevice
 1. Add following repo to cydia - **```https://build.frida.re```**
 2. Search for 'frida' and install frida.
 3. Once installation finishes **frida-server** will be present in path and listening on port **27042** on the iDevice.
@@ -75,7 +75,7 @@ com.reddit.Reddit on (iPhone: 11.3.1) [net] #
 
 ## Application running on remote Android (rooted) device
 
-### Install frida-server on Android device
+#### Install frida-server on Android device
 Connect to remote device with ADB.
 
 **`adb connect <android_device_ip>`**
