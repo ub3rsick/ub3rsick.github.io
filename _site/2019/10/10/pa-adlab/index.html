@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Pentester Academy Attacking and Defending Active Directory Lab &middot; UB3RS3C
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+ 	<!-- <body class="theme-base-ff layout-reverse"> -->
+	<body class="layout-reverse">
+
+    <div class="sidebar">
+  <!-- <div class="container sidebar-sticky"> -->
+    <!-- to make the sidebar contents from top to bottom -->
+  <div class="container">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          UB3RS3C
+        </a>
+      </h1>
+      <p class="lead">Learning stuff, one topic at a time.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About me</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+      <!-- <a class="sidebar-nav-item" href="https://github.com/poole/hyde/archive/v2.1.0.zip">Download</a> -->
+      <!-- <a class="sidebar-nav-item" href="https://github.com/poole/hyde">GitHub project</a> -->
+      <span class="sidebar-nav-item">Currently v2.1.0</span>
+    </nav>
+
+    <p>&copy; 2019. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+    <!-- <div class="container"> -->
+      <div class="post">
+  <h1 class="post-title">Pentester Academy Attacking and Defending Active Directory Lab</h1>
+  <span class="post-date">10 Oct 2019</span>
+  <p>As of October 2019 I am a Ceritified Red Team Professional. This post summarises my journey in which I overcame the challenges in <a href="https://www.pentesteracademy.com/activedirectorylab">Attacking and Defending Active Directory Lab</a> and became a Ceritified Red Team Professional.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>TL;DR - My lack of knowledge in active directory and how much it intimidated me.</p>
+
+<p><img src="/assets/pa_adlab/unknown_.jpg" alt="Unknown" /></p>
+
+<h2 id="the-lab">The Lab</h2>
+
+<p>I purchased one month lab on 19th August 2019 and started my lab on 20th. Below image will give an overview of the lab environment.</p>
+
+<p><img src="/assets/pa_adlab/activedirectorylab2.png" alt="ADLAB" /></p>
+
+<p>After purchasing the lab access, I received the following stuff:</p>
+
+<ul>
+  <li>VPN connection details to the lab.</li>
+  <li>Windows machine / user details.</li>
+  <li>Academy Attacking and Defending Active Directory course videos/slides/lab notes</li>
+</ul>
+
+<p>After VPN is connected, one can RDP to the student machine and start doing various lab exercises. The course videos are very beginner friendly and the instructor clearly and consicely explains various active directory concepts and demonstrates different attacks. At the end of each video, there are “Learning Objectives” which asks the student to apply whatever concept was explained in the video to solve the objective. The instructor encourages  the students to solve the objectives by themselves and if they are facing difficulties, there are walkthough videos and notes which cover these objectives.</p>
+
+<p>The course covers the following topics in depth:</p>
+<ul>
+  <li>Active Directory Enumeration. Use scripts, built-in tools and MS ActiveDirectory module to enumerate the target domain.</li>
+  <li>Local Privilege Escalation</li>
+  <li>Domain Privilege Escalation</li>
+  <li>Domain Persistence and Dominance</li>
+  <li>Cross trust attacks</li>
+  <li>Forest persistence and dominance</li>
+  <li>Defenses - Monitoring</li>
+  <li>Defenses and bypass - Architecture and Work culture Changes</li>
+  <li>Defenses and bypass - Deception</li>
+  <li>Defenses and bypass - PowerShell</li>
+</ul>
+
+<p>For me, one month lab duration was more than enough to go trough the whole course and do the learning objectives.</p>
+
+<p>Once I felt confident that I can tackle the certification exam, I scheduled it on 3rd October 2019. (Believe me it was hard to get a date).</p>
+
+<h2 id="the-exam">The Exam</h2>
+
+<blockquote>
+  <p>The exam lab is a seperate Windows environment, which is fully patched and contains the latest Windows operating systems with configurations and privileges like a real enterprise environment. The students are required to compromise a fixed number of machines. The exam is designed in such a way that a student will be forced to apply all the different things taught in the course.</p>
+</blockquote>
+
+<blockquote>
+  <p>To be successful, students must solve the challenges by enumerating the environment and carefully constructing attack paths. At the end of the exam, students need to submit the detailed solutions to challenges along with practical mitigations.</p>
+</blockquote>
+
+<p>My exam was scheduled to start on 4:30PM. Exactly at 4:00 PM, I got an email from the ADLAB team with the exam lab connection details. I was on my way back home from work. Once I reached my place, freshened up and started the exam at around 4:45PM.</p>
+
+<p>It took me whole 24 hours to compromise all the machines, This would vary for each individiual depending on the level of preparation and how well they have taken note of things during the enumeration process.</p>
+
+<p>In my case, I compromised one box within an hour and was stuck for the next 22 hours. I could see the whole path to the end and had all the information needed to proceed. I failed to notice one bit of information and I lost considerable amount of time. Despair and hopelessness.</p>
+
+<p><img src="/assets/pa_adlab/hopless.jpg" alt="despair" /></p>
+
+<p>In between these 22 hours I constructed an attack path and was pretty much sure this is the way to the goal. But as I mentioned earlier, there was a disconnect or a gap in the path.</p>
+
+<h3 id="breakthrough">Breakthrough</h3>
+
+<p>4th October 2019, 03:26PM - As a last resort, I went though all the information I had collected hoping to find any bit of information that I might have overlooked and to my surprise, I came across one little detail. I got what I needed to bridge the gap in the path I had imagined.</p>
+
+<p>Within the next one hour I compromised the rest of the machines and finished the whole thing by 04:27PM. I had all the screenshots and notes taken. I went out for a coffee and rested for a while to compensate for the sleep I lost.</p>
+
+<p>I prepared a detailed report (50 pages) and submitted for evaluation in the next 24 hours (48 hours allowed).</p>
+
+<h2 id="the-outcome">The Outcome</h2>
+
+<p>On 10th of October 2019 at 09:08PM, I got an email from the ADLAB team saying that I cleared the certification exam.</p>
+
+<p><img src="/assets/pa_adlab/xm_result.png" alt="result" /></p>
+
+<p>After few days, I recieved another mail from Pentester Academy with my CRTP certificate.</p>
+
+<p><img src="/assets/pa_adlab/cert.png" alt="cert" /></p>
+
+<p>The Instructor (Nikhil Mittal), took the time to write an email to me congratulating me on clearning the exam and told me that he liked my report as it was very detailed and easy to follow.</p>
+
+<p>I learned an important lesson here; dont get sloppy during enumeration. Don’t <strong>overlook</strong> anything. Enumerate everything, take note of every bit of information.</p>
+
+<h2 id="tldr">TL;DR</h2>
+<p>An awesome beginner friendly course on active directory security from pentester academy.</p>
+
+<p>I would highly recommend this course to anyone who wants to learn about active directory security.</p>
+
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2018/09/21/objection-remote-device-app-hook/">
+            (Objection) Mobile apps on remote device
+            <small>21 Sep 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2018/08/26/mobile-pt-frameworks/">
+            Passionfruit, Objection and Drozer
+            <small>26 Aug 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2018/08/26/Terminal-Setup/">
+            Terminal Setup
+            <small>26 Aug 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>
+
+

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Terminal Setup &middot; UB3RS3C
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+ 	<!-- <body class="theme-base-ff layout-reverse"> -->
+	<body class="layout-reverse">
+
+    <div class="sidebar">
+  <!-- <div class="container sidebar-sticky"> -->
+    <!-- to make the sidebar contents from top to bottom -->
+  <div class="container">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          UB3RS3C
+        </a>
+      </h1>
+      <p class="lead">Learning stuff, one topic at a time.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About me</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+      <!-- <a class="sidebar-nav-item" href="https://github.com/poole/hyde/archive/v2.1.0.zip">Download</a> -->
+      <!-- <a class="sidebar-nav-item" href="https://github.com/poole/hyde">GitHub project</a> -->
+      <span class="sidebar-nav-item">Currently v2.1.0</span>
+    </nav>
+
+    <p>&copy; 2019. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+    <!-- <div class="container"> -->
+      <div class="post">
+  <h1 class="post-title">Terminal Setup</h1>
+  <span class="post-date">26 Aug 2018</span>
+  <p>The terminal emulator and themes I use in my virtual machines.</p>
+
+<!-- more -->
+
+<h2 id="kali-vm">Kali VM</h2>
+
+<ul>
+  <li>Terminal - <strong>Tilix</strong>
+    <ul>
+      <li><code>sudo apt-get install tilix</code></li>
+    </ul>
+  </li>
+  <li>Tilix Themes
+    <ul>
+      <li>Tilix themes <a href="https://github.com/storm119/Tilix-Themes">GitHub Repo</a></li>
+      <li><strong>Argonaut</strong></li>
+      <li><code>wget -qO $HOME"/.config/tilix/schemes/argonaut.json" https://git.io/v7QV5</code></li>
+      <li>Apply color scheme
+        <ul>
+          <li>Preferences/Default/Color/Color scheme</li>
+        </ul>
+      </li>
+      <li><a href="https://github.com/storm119/Tilix-Themes/blob/master/Themes.md">Other Themes</a></li>
+    </ul>
+  </li>
+  <li>Shell - <strong>zsh</strong>
+    <ul>
+      <li><code>chsh -s /bin/zsh</code></li>
+    </ul>
+  </li>
+  <li>Zsh Theme - <strong>oh-my-zsh</strong>
+    <ul>
+      <li>oh-my-zsh <a href="https://github.com/robbyrussell/oh-my-zsh">GitHub Repo</a></li>
+      <li>Install via curl : <code>sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"</code></li>
+      <li>Install via wget : <code>sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"</code></li>
+      <li>Theme - <strong>Agnoster</strong></li>
+      <li>Edit ~/.zshrc and set theme as follows
+        <ul>
+          <li><code>ZSH_THEME="agnoster"</code></li>
+        </ul>
+      </li>
+      <li>Install Powerline fonts. (Fixes font issue with agnoster theme)
+        <ul>
+          <li><code>git clone https://github.com/powerline/fonts</code></li>
+          <li><code>cd fonts</code></li>
+          <li><code>./install.sh</code></li>
+          <li>or <code>sudo apt-get install fonts-powerline</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/term-setup/kali-setup.PNG" alt="Kali Terminal" /></p>
+
+<h2 id="macososx-setup">MacOS/OSX Setup</h2>
+
+<ul>
+  <li>Terminal Emulator - <a href="https://www.iterm2.com/"><strong>iTerm2</strong></a></li>
+  <li>iTerm2 Themes
+    <ul>
+      <li>iTerm2 theme <a href="https://github.com/mbadolato/iTerm2-Color-Schemes">GitHub Repo</a></li>
+      <li><strong>Argonaut</strong></li>
+      <li><code>git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git</code></li>
+      <li>Open <strong>iTerm2&gt; Preferences&gt; Profile&gt; Colors&gt; Color Presets</strong></li>
+      <li>Click import and select theme in schemes directory inside cloned repo.</li>
+      <li>Select <strong>Argonaut</strong> color scheme from Color Presets drop down</li>
+    </ul>
+  </li>
+  <li>Shell - <strong>zsh</strong>
+    <ul>
+      <li><code>chsh -s /bin/zsh</code></li>
+    </ul>
+  </li>
+  <li>Zsh Theme - <strong>oh-my-zsh</strong>
+    <ul>
+      <li>Follow instructions same as for Kali.</li>
+      <li>Set font <strong>Meslo LG L for powerline</strong> in iTerm2.</li>
+      <li>Uncheck <strong>use different font for non-ASCII text</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/term-setup/mac-os-setup.PNG" alt="OSX Terminal" /></p>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2019/10/10/pa-adlab/">
+            Pentester Academy Attacking and Defending Active Directory Lab
+            <small>10 Oct 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2018/09/21/objection-remote-device-app-hook/">
+            (Objection) Mobile apps on remote device
+            <small>21 Sep 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2018/08/26/mobile-pt-frameworks/">
+            Passionfruit, Objection and Drozer
+            <small>26 Aug 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>
+
+

