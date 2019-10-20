@@ -1,0 +1,2 @@
+I"�<p>Polymorphism is a generic method to prevent pattern-matching. Pattern-matching means that a program P (an antivirus or an IDS) has a data-base with ‘signatures’. A signature is bytes suite identifying a program. We can defeat such pattern matching programs by replacing assembly instructions with other equivalent set of instructions which will result in different shellcode. Consider the below example clearing a register and moving some value into it.</p>
+:ET

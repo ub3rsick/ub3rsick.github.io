@@ -1,0 +1,85 @@
+I"6<p>The terminal emulator and themes I use in my virtual machines.</p>
+
+<!-- more -->
+
+<h2 id="kali-vm">Kali VM</h2>
+
+<ul>
+  <li>Terminal - <strong>Tilix</strong>
+    <ul>
+      <li><code>sudo apt-get install tilix</code></li>
+    </ul>
+  </li>
+  <li>Tilix Themes
+    <ul>
+      <li>Tilix themes <a href="https://github.com/storm119/Tilix-Themes">GitHub Repo</a></li>
+      <li><strong>Argonaut</strong></li>
+      <li><code>wget -qO $HOME"/.config/tilix/schemes/argonaut.json" https://git.io/v7QV5</code></li>
+      <li>Apply color scheme
+        <ul>
+          <li>Preferences/Default/Color/Color scheme</li>
+        </ul>
+      </li>
+      <li><a href="https://github.com/storm119/Tilix-Themes/blob/master/Themes.md">Other Themes</a></li>
+    </ul>
+  </li>
+  <li>Shell - <strong>zsh</strong>
+    <ul>
+      <li><code>chsh -s /bin/zsh</code></li>
+    </ul>
+  </li>
+  <li>Zsh Theme - <strong>oh-my-zsh</strong>
+    <ul>
+      <li>oh-my-zsh <a href="https://github.com/robbyrussell/oh-my-zsh">GitHub Repo</a></li>
+      <li>Install via curl : <code>sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"</code></li>
+      <li>Install via wget : <code>sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"</code></li>
+      <li>Theme - <strong>Agnoster</strong></li>
+      <li>Edit ~/.zshrc and set theme as follows
+        <ul>
+          <li><code>ZSH_THEME="agnoster"</code></li>
+        </ul>
+      </li>
+      <li>Install Powerline fonts. (Fixes font issue with agnoster theme)
+        <ul>
+          <li><code>git clone https://github.com/powerline/fonts</code></li>
+          <li><code>cd fonts</code></li>
+          <li><code>./install.sh</code></li>
+          <li>or <code>sudo apt-get install fonts-powerline</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/term-setup/kali-setup.PNG" alt="Kali Terminal" /></p>
+
+<h2 id="macososx-setup">MacOS/OSX Setup</h2>
+
+<ul>
+  <li>Terminal Emulator - <a href="https://www.iterm2.com/"><strong>iTerm2</strong></a></li>
+  <li>iTerm2 Themes
+    <ul>
+      <li>iTerm2 theme <a href="https://github.com/mbadolato/iTerm2-Color-Schemes">GitHub Repo</a></li>
+      <li><strong>Argonaut</strong></li>
+      <li><code>git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git</code></li>
+      <li>Open <strong>iTerm2&gt; Preferences&gt; Profile&gt; Colors&gt; Color Presets</strong></li>
+      <li>Click import and select theme in schemes directory inside cloned repo.</li>
+      <li>Select <strong>Argonaut</strong> color scheme from Color Presets drop down</li>
+    </ul>
+  </li>
+  <li>Shell - <strong>zsh</strong>
+    <ul>
+      <li><code>chsh -s /bin/zsh</code></li>
+    </ul>
+  </li>
+  <li>Zsh Theme - <strong>oh-my-zsh</strong>
+    <ul>
+      <li>Follow instructions same as for Kali.</li>
+      <li>Set font <strong>Meslo LG L for powerline</strong> in iTerm2.</li>
+      <li>Uncheck <strong>use different font for non-ASCII text</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/term-setup/mac-os-setup.PNG" alt="OSX Terminal" /></p>
+:ET

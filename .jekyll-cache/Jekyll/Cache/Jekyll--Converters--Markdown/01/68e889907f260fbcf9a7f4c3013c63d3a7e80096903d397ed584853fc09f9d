@@ -1,0 +1,8 @@
+I"o<h3 id="assignment-2-shell-reverse-tcp-shellcode-linuxx86">Assignment #2: Shell Reverse TCP Shellcode (Linux/x86)</h3>
+<p>The second assigment is to create Reverse TCP Shellcode which does following.</p>
+<ul>
+  <li>Connects back to an IP address and port</li>
+  <li>Execs a shell upon connection</li>
+  <li>The IP address  and port number are configurable</li>
+</ul>
+:ET

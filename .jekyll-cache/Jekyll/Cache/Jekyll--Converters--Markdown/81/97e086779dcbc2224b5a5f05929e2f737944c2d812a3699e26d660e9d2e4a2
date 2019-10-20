@@ -1,0 +1,2 @@
+I"<p>Metasploit is an awesome penetration testing software which a large number of exploits, payloads, encoders etc. Our goal in this assignment is to analyze three different payloads for linux/x86 generated with msfpayload (I will be using msfvenom instead) using GDB/Ndisasm/Libemu.</p>
+:ET

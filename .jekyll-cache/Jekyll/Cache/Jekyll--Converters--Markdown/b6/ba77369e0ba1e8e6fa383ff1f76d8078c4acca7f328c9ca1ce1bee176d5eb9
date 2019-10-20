@@ -1,0 +1,135 @@
+I"�<p>This post describes how to hook applications running on a remote device (iOS/Android) using Objection. Describes how to setup port forwarding.</p>
+
+<!-- more -->
+
+<h2 id="installing-frida-tools-cli-tools-on-linuxmac">Installing frida-tools (CLI tools) on Linux/Mac</h2>
+<p>Use the following commands to install frida-tools.</p>
+
+<p><strong><code>pip install frida-tools</code></strong></p>
+
+<p>If <strong>frida-tools</strong> already installed and wants to update to latest version.</p>
+
+<p><strong><code>pip install frida-tools --upgrade</code></strong></p>
+
+<h2 id="application-running-on-remote-ios-jailbroken-device">Application running on Remote iOS (jailbroken) device</h2>
+<h4 id="install-frida-frida-server-on-idevice">Install Frida (frida-server) on iDevice</h4>
+<ol>
+  <li>Add following repo to cydia - <strong><code>https://build.frida.re</code></strong></li>
+  <li>Search for ‘frida’ and install frida.</li>
+  <li>Once installation finishes <strong>frida-server</strong> will be present in path and listening on port <strong>27042</strong> on the iDevice.</li>
+</ol>
+
+<h4 id="port-forward-local-port-27042-to-remote-port-27042">Port forward local port 27042 to remote port 27042</h4>
+<p>From PC/Mac terminal, run the following command to forward local port 27042 to remote port 27042.</p>
+
+<p><strong><code>ssh -L 27042:127.0.0.1:27042 root@&lt;iDevice_ip&gt;</code></strong></p>
+
+<p>Enter iDevice root password and leave the terminal as is.</p>
+
+<h4 id="list-applications-running-on-device">List applications running on device</h4>
+<p>Make sure frida-tools is upto date on the pc/MAC.</p>
+
+<p>List running applications : <strong><code>frida-ps -R</code></strong></p>
+
+<h5 id="sample-output">Sample Output</h5>
+<pre><code>(virt-python3)  rizal@rizals-Mac$ frida-ps -R
+ PID  Name
+----  --------------------------------------------------------
+2712  Camera
+ 980  InCallService
+2001  Mail
+1720  Messages
+ 790  MusicUIService
+2715  Photos
+1726  Settings
+1253  User Authentication
+3424  WhatsApp
+....
+&lt;snipped&gt;
+....
+</code></pre>
+
+<h4 id="hook-application-on-remote-idevice-with-objection">Hook application on remote iDevice with Objection</h4>
+<p>Command: <strong><code>objection --network --gadget "Application Name" explore</code></strong></p>
+<blockquote>
+  <p>The <strong><code>--network</code></strong> flag tells objection to connect using a network connection instead of USB.</p>
+</blockquote>
+
+<h5 id="sample-output-1">Sample Output</h5>
+<pre><code>(virt-python3)  rizal@rizals-Mac$ objection --network --gadget "Reddit" explore
+
+     _     _         _   _
+ ___| |_  |_|___ ___| |_|_|___ ___
+| . | . | | | -_|  _|  _| | . |   |
+|___|___|_| |___|___|_| |_|___|_|_|
+        |___|(object)inject(ion) v1.4.3
+
+     Runtime Mobile Exploration
+        by: @leonjza from @sensepost
+
+[tab] for command suggestions
+com.reddit.Reddit on (iPhone: 11.3.1) [net] #
+</code></pre>
+
+<h2 id="application-running-on-remote-android-rooted-device">Application running on remote Android (rooted) device</h2>
+
+<h4 id="install-frida-server-on-android-device">Install frida-server on Android device</h4>
+<p>Connect to remote device with ADB.</p>
+
+<p><strong><code>adb connect &lt;android_device_ip&gt;</code></strong></p>
+
+<p>Go to frida <a href="https://github.com/frida/frida/releases">releases</a> page and get the <strong>frida-server</strong> binary for android. Push it onto android device and set appropriate permissions.</p>
+
+<p><strong><code>adb push frida-server /data/local/tmp/ </code></strong></p>
+
+<p><strong><code>adb shell "chmod 755 /data/local/tmp/frida-server"</code></strong></p>
+
+<p>Run frida-server on android device.</p>
+
+<p><strong><code>adb shell "/data/local/tmp/frida-server &amp;"</code></strong></p>
+
+<h4 id="port-forward-local-port-27042-to-remote-port-27042-1">Port forward local port 27042 to remote port 27042</h4>
+
+<p><strong><code>adb forward tcp:27042 tcp:27042</code></strong></p>
+
+<p>If port forwarding is not setup, the following error will come up.</p>
+<pre><code>(objection-py3env) android@tamer:~$ frida-ps -R 
+Failed to enumerate processes: unable to connect to remote frida-server
+</code></pre>
+<h5 id="sample-output-once-port-forward-is-setup">Sample output once port forward is setup</h5>
+<pre><code>(objection-py3env) android@tamer:~$ frida-ps -R 
+ PID  Name
+----  -------------------------------
+ 126  adbd
+1966  android.ext.services
+2177  android.process.acore
+2084  android.process.media
+1249  audioserver
+ 245  batteryd
+1250  cameraserver
+2162  com.android.calendar
+</code></pre>
+<h4 id="hook-application-on-remote-android-with-objection">Hook application on remote Android with Objection</h4>
+<p>Command: <strong><code>objection --gadget "Application Name" explore</code></strong></p>
+<h5 id="sample-output-2">Sample Output</h5>
+<pre><code>(objection-py3env) android@tamer:~$ objection --gadget "net.fxxl" explore
+
+     _     _         _   _
+ ___| |_  |_|___ ___| |_|_|___ ___
+| . | . | | | -_|  _|  _| | . |   |
+|___|___|_| |___|___|_| |_|___|_|_|
+        |___|(object)inject(ion) v1.4.3
+
+     Runtime Mobile Exploration
+        by: @leonjza from @sensepost
+
+[tab] for command suggestions
+
+net.fxxl on (Android: 7.0) [usb] # android sslpinning disable
+Job: d9b3a203-acda-44d5-a179-5b4e84d8816a - Starting
+[5b4e84d8816a] [android-ssl-pinning-bypass] Custom, Empty TrustManager ready
+[5b4e84d8816a] [android-ssl-pinning-bypass] OkHTTP 3.x Found
+[5b4e84d8816a] [android-ssl-pinning-bypass] TrustManagerImpl
+Job: d9b3a203-acda-44d5-a179-5b4e84d8816a - Started
+</code></pre>
+:ET

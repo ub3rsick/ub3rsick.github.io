@@ -1,0 +1,52 @@
+I"<p>Often during pen tests you may obtain a shell without having tty, yet wish to
+interact further with the system. Here are some commands which will allow you to
+spawn a tty shell. Obviously some of this will depend on the system environment
+and installed packages.</p>
+
+<p><strong>Shell Spawning</strong></p>
+
+<pre><code class="language-python">python -c 'import pty; pty.spawn("/bin/sh")'
+</code></pre>
+
+<pre><code class="language-bash">echo os.system('/bin/bash')
+</code></pre>
+<!-- more -->
+<pre><code class="language-bash">/bin/sh -i
+</code></pre>
+
+<pre><code class="language-perl">perl —e 'exec "/bin/sh";'
+</code></pre>
+
+<pre><code class="language-perl">perl: exec "/bin/sh";
+</code></pre>
+
+<pre><code class="language-ruby">ruby: exec "/bin/sh"
+</code></pre>
+
+<pre><code>lua: os.execute('/bin/sh')
+</code></pre>
+
+<p>From within IRB - Interactive Ruby Shell</p>
+
+<pre><code class="language-ruby">exec "/bin/sh"
+</code></pre>
+
+<p>From within vi</p>
+
+<pre><code>:!bash
+</code></pre>
+
+<p>From within vi</p>
+
+<pre><code>:set shell=/bin/bash:shell
+</code></pre>
+
+<p>From within nmap (nmap –interactive)</p>
+
+<pre><code>!sh
+</code></pre>
+
+<p>Many of these will also allow you to escape jail shells.</p>
+
+<p>Original Post: <a href="http://netsec.ws/?p=337">NETSEC - Spawning a TTY shell</a></p>
+:ET

