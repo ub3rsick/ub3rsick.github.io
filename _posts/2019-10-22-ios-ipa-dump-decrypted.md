@@ -79,6 +79,12 @@ Note: If you have iproxy instead, you can use the following command.
 
 `iproxy 2222 22`
 
+![iproxy](/assets/ios_dump_ipa/iproxy.png)
+
+On mac iproxy is installed along with usbmuxd:
+
+`brew install usbmuxd`
+
 ### Installing Requirements
 
 Clone the [frida-ios-dump](https://github.com/AloneMonkey/frida-ios-dump) git repo and navigate inside the directory. 
