@@ -77,7 +77,7 @@ Now we can SSH to the iOS device connected via USB.
 
 Note: If you have iproxy instead, you can use the following command.
 
-`iproxy 22:2222`
+`iproxy 2222 22`
 
 ### Installing Requirements
 
