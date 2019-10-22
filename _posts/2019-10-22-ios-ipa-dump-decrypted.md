@@ -44,6 +44,7 @@ The device should be Jailbroken. I'm using a iPhone 5s running on iOS 12.2 jailb
 
 ![frida-repo-add](/assets/ios_dump_ipa/frida-repo.png) | ![frida-installed](/assets/ios_dump_ipa/frida-installed.png)
 
+
 Once the source is added, you can search for frida in Cydia. Install frida from Cydia, once installation is finished, frida-server will be running on th device and listening on its default port 27042.
 
 To verify frida-server is running on the device, list the processes running on the device using **frida-ps**.
