@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Dumping Decrypted IPA [Jaibroken iPhone 5s iOS 12.2]"
+title: "Dumping Decrypted IPA [Jailbroken iPhone 5s iOS 12.2]"
 ---
 
 This post demonstrates how to dump decrypted iOS app IPA from a jailbroken iOS device. I'm using a Jailbroken iPhone 5s running iOS 12.2 to demostrate the entire process.
