@@ -17,29 +17,53 @@ When a device is jailbroken, many unix utilities (apt, su etc.), applications (C
 
 `
 /Applications/Cydia.app
+
 /private/var/stash
+
 /private/var/lib/apt
+
 /private/var/tmp/cydia.log
+
 /private/var/lib/cydia
+
 /private/var/mobile/Library/SBSettings/Themes
+
 /Library/MobileSubstrate/MobileSubstrate.dylib
+
 /Library/MobileSubstrate/DynamicLibraries/Veency.plist
+
 /Library/MobileSubstrate/DynamicLibraries/LiveClock.plist
+
 /System/Library/LaunchDaemons/com.ikey.bbot.plist
+
 /System/Library/LaunchDaemons/com.saurik.Cydia.Startup.plist
+
 /var/cache/apt
+
 /var/lib/apt
+
 /var/lib/cydia
+
 /var/log/syslog
+
 /var/tmp/cydia.log
+
 /bin/bash
+
 /bin/sh
+
 /usr/sbin/sshd
+
 /usr/libexec/ssh-keysign
+
 /usr/sbin/sshd
+
 /usr/bin/sshd
+
 /usr/libexec/sftp-server
+
 /etc/ssh/sshd_config
+
 /etc/apt
 `
 
@@ -52,6 +76,7 @@ Let us look at a simple sample implementation in which the application looks for
 Lets run this app on a jailbroke device to see if it works.
 
 ![install](/assets/ios-jb-detect-bypass/02_install.png) | ![run1](/assets/ios-jb-detect-bypass/03_jbd.png)
+
 
 Let us analyze the application executable in hopper disassembler. Find the application executable location.
 
@@ -69,7 +94,7 @@ Pull the application binary to the host machine.
 
 ![cyberduck_pull](/assets/ios-jb-detect-bypass/07-cd-pull.png)
 
-Open the application binary in Hopper disassembler.(/assets/ios-jb-detect-bypass/10-jbmethod.png)
+Open the application binary in Hopper disassembler.
 
 ![hopper-bin](/assets/ios-jb-detect-bypass/08-open-bin.png)
 
@@ -99,7 +124,7 @@ The **tbz** arm instruction tests a bit and branches if zero to the specified la
 
 ![tbz-arm](/assets/ios-jb-detect-bypass/14-tbz-arm.png)
 
-In our case the instruction is `tbz w8, 0x0, loc_1000064ec`; this will check if the w8 register is zero and if zero the control will passed to the label `loc_1000064ec` from where the code which shows alert for showing device not jailbroken starts.
+In our case the instruction is `tbz w8, 0x0, loc_1000064ec`. This will check if the w8 register is zero and if zero the control will passed to the label `loc_1000064ec` from where the code which shows alert for showing device not jailbroken starts.
 
 ![stock_device_alert](/assets/ios-jb-detect-bypass/15-alert-stock.png)
 
@@ -108,6 +133,7 @@ Now lets patch this instruction to branch to the label `loc_1000064ec` irrespect
 ![assemble](/assets/ios-jb-detect-bypass/16-assemble.png)
 
 Replace the instruction with just a branch instruction to the desired label.
+
 `b loc_1000064ec`
 
 ![patch1](/assets/ios-jb-detect-bypass/17-patch1.png)
@@ -125,7 +151,7 @@ Now, save the patched binary.
 
 ![new-bin](/assets/ios-jb-detect-bypass/21-patch-bin.png)
 
-Put the patched binary in the application directory on the device replacing the original binary. This patched binary does not have code signing, so for it run successfully, the [AppSync Unified](https://cydia.akemi.ai/?page/net.angelxwind.appsyncunified) Tweak from [Karens Repo](https://cydia.akemi.ai/?) must be installed from Cydia on the Jailbroken device.
+Put the patched binary in the application directory on the device replacing the original binary. This patched binary does not have code signing, so for it to run successfully, the [AppSync Unified](https://cydia.akemi.ai/?page/net.angelxwind.appsyncunified) Tweak from [Karens Repo](https://cydia.akemi.ai/?) must be installed from Cydia on the Jailbroken device.
 
 #### Bypassing FileSystem Based Checks With Cydia Tweaks
 
@@ -139,6 +165,7 @@ There are several tweaks available in cydia which allows to bypass jailbreak det
 | Shadow| [Jolano's Repo](https://ios.jjolano.me/)| iOS 8.0 - 12.1.2 |
 | Liberty Lite | [Ryley's Repo](ryleyangus.com/repo/)| iOS 11 - 12 |
 | UnSub | [Nepeta Repo Mirror](http://nepeta.ignition.fun) | iOS 9 - 12|
+
 
 Lets install and test the Liberty Lite tweak to see whether it is able to bypass our simple jailbreak detection.
 
