@@ -181,10 +181,13 @@ The tweak is able to bypass the cydia:// uri scheme check and most of the file s
 
 ### Bypassing Jailbreak Detection Using Frida
 
-Lets hook the jailbreak detection methods **jbCheck1** and **jbCheck2** during run time see what does it return to the caller. We know the name of the view controller in which the jailbreak detection methods are implemented.
+Lets hook the jailbreak detection methods **jbCheck1** and **jbCheck2** during run time and observe the values it return to the caller. We know the name of the view controller in which the jailbreak detection methods are implemented from the source code/reversing/frida scripts.
 
 Name of view controller: **ViewController**
+
+
 Name of Methods: **jbCheck1** and **jbCheck2**
+
 
 Below is the full javascript code which hooks both the aforementioned methods and displays the return values.
 
@@ -226,7 +229,7 @@ else {
 
 ![hook-methods-code](/assets/ios-jb-detect-bypass/28-hook-methods.png)
 
-Let us inject the **hook_methods.js** file to our application using frida during runtime.
+Let us inject the **hook_methods.js** code to our application using frida during runtime.
 
 
 Return values when Liberty Lite tweak is not enabled for the application.
@@ -235,7 +238,9 @@ Return values when Liberty Lite tweak is not enabled for the application.
 ![hook-noliberty-gif](/assets/ios-jb-detect-bypass/30-hook-noliberty.gif)
 
 
-Return values when Liberty Lite tweak is enabled for the application. Earlier we observed that, Liberty Lite fails to mask detecting the `/usr/bin/apt` file path and hence returning **True** for **jbCheck1**. This is confirmed when we inject the **hook_methods.js** into the application with Liberty Lite enabled.
+
+
+Earlier we observed that, Liberty Lite fails to mask detecting the `/usr/bin/apt` file path and hence returning **True** for **jbCheck1**. This is confirmed when we inject the **hook_methods.js** into the application with Liberty Lite enabled.
 
 ![hook-liberty](/assets/ios-jb-detect-bypass/31-hook-liberty.png)
 ![hook-liberty-gif](/assets/ios-jb-detect-bypass/32-hook-liberty.gif)
