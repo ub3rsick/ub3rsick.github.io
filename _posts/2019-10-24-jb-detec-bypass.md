@@ -179,3 +179,117 @@ Now let us enable the Liberty Lite Tweak and see if it is able to bypass these c
 The tweak is able to bypass the cydia:// uri scheme check and most of the file system based checks except for the `/usr/bin/apt` check.
 
 
+### Bypassing Jailbreak Detection Using Frida
+
+Lets hook the jailbreak detection methods **jbCheck1** and **jbCheck2** during run time see what does it return to the caller. We know the name of the view controller in which the jailbreak detection methods are implemented.
+
+Name of view controller: **ViewController**
+Name of Methods: **jbCheck1** and **jbCheck2**
+
+Below is the full javascript code which hooks both the aforementioned methods and displays the return values.
+
+```javascript
+if (ObjC.available) { 
+	try { 
+		var className = "ViewController"; 
+
+		var funcName1 = "+ jbCheck1"; 
+		var funcName2 = "+ jbCheck2"; 
+		var hook1 = eval('ObjC.classes.' + className + '["' + funcName1 + '"]');
+		var hook2 = eval('ObjC.classes.' + className + '["' + funcName2 + '"]');
+
+		Interceptor.attach(hook1.implementation, { 
+			onLeave: function(retval) { 
+				console.log("[*] Class Name: " + className);
+				console.log("[*] Method Name: " + funcName1); 
+				console.log("\t[-] Return Value: " + retval);
+			 }
+		});
+
+                Interceptor.attach(hook2.implementation, {
+                        onLeave: function(retval) {
+                                console.log("[*] Class Name: " + className);
+                                console.log("[*] Method Name: " + funcName2);
+                                console.log("\t[-] Return Value: " + retval);
+                         }
+                });
+
+	}
+	catch(err) {
+		console.log("[!] Exception2: " + err.message);
+	} 
+} 
+else {
+	console.log("Objective-C Runtime is not available!");
+}
+```
+
+![hook-methods-code](/assets/ios-jb-detect-bypass/28-hook-methods.png)
+
+Let us inject the **hook_methods.js** file to our application using frida during runtime.
+
+
+Return values when Liberty Lite tweak is not enabled for the application.
+
+![hook-noliberty](/assets/ios-jb-detect-bypass/29-hook-noliberty.png)
+![hook-noliberty-gif](/assets/ios-jb-detect-bypass/30-hook-noliberty.gif)
+
+
+Return values when Liberty Lite tweak is enabled for the application. Earlier we observed that, Liberty Lite fails to mask detecting the `/usr/bin/apt` file path and hence returning **True** for **jbCheck1**. This is confirmed when we inject the **hook_methods.js** into the application with Liberty Lite enabled.
+
+![hook-liberty](/assets/ios-jb-detect-bypass/31-hook-liberty.png)
+![hook-liberty-gif](/assets/ios-jb-detect-bypass/32-hook-liberty.gif)
+
+Now let us modify the return values for both functions **jbCheck1** and **jbCheck2** so that they will return False in all cases. Below javascript code - **method_override.js** - does just this.
+
+```javascript
+if (ObjC.available) { 
+	try { 
+		var className = "ViewController"; 
+
+		var funcName1 = "+ jbCheck1"; 
+		var funcName2 = "+ jbCheck2"; 
+		var hook1 = eval('ObjC.classes.' + className + '["' + funcName1 + '"]');
+		var hook2 = eval('ObjC.classes.' + className + '["' + funcName2 + '"]');
+
+		Interceptor.attach(hook1.implementation, { 
+			onLeave: function(retval) { 
+				console.log("[*] Class Name: " + className);
+				console.log("[*] Method Name: " + funcName1); 
+				console.log("\t[*] Original Return Value: " + retval);
+
+				var newret = ptr("0x0");
+				retval.replace(newret);
+				console.log("\t[*] Fake Return Value: " + newret);
+				
+			 }
+		});
+
+                Interceptor.attach(hook2.implementation, {
+                        onLeave: function(retval) {
+                                console.log("[*] Class Name: " + className);
+                                console.log("[*] Method Name: " + funcName2);
+                                console.log("\t[*] Original Return Value: " + retval);
+
+                                var newret = ptr("0x0");
+                                retval.replace(newret);
+                                console.log("\t[*] Fake Return Value: " + newret);
+
+                         }
+                });
+
+	}
+	catch(err) {
+		console.log("[!] Exception2: " + err.message);
+	} 
+} 
+else {
+	console.log("Objective-C Runtime is not available!");
+}
+```
+
+![method-override-code](/assets/ios-jb-detect-bypass/33-method-override.png)
+
+Now let us inject this into our application see the outcome.
+
+![frida-jbbypass](/assets/ios-jb-detect-bypass/34-frida-jb-bypass.gif)
