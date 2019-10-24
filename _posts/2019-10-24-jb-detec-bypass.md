@@ -15,7 +15,7 @@ Below are the different methods used to determine whether the current device is 
 
 When a device is jailbroken, many unix utilities (apt, su etc.), applications (Cydia.app) are written to the file system at specific locations. During runtime, an app can look if there are files existing at these paths to determine if the device is jailbroken or not. Below is a list of paths to files, applications which are written to the file system once a device is jailbroken.
 
-`
+```
 /Applications/Cydia.app
 
 /private/var/stash
@@ -65,7 +65,7 @@ When a device is jailbroken, many unix utilities (apt, su etc.), applications (C
 /etc/ssh/sshd_config
 
 /etc/apt
-`
+```
 
 Note: This no way a complete list.
 
