@@ -143,7 +143,7 @@ There are several tweaks available in cydia which allows to bypass jailbreak det
 | Shadow| [Jolano's Repo](https://ios.jjolano.me/)| iOS 8.0 - 12.1.2 |
 | Liberty Lite | [Ryley's Repo](http://ryleyangus.com/repo/)| iOS 11 - 12 |
 | UnSub | [Nepeta Repo Mirror](http://nepeta.ignition.fun) | iOS 9 - 12|
-
+| ---------- | ---------- | -------------------- |
 
 
 
