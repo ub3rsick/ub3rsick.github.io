@@ -54,6 +54,8 @@ Lets run this app on a jailbroke device to see if it works.
 ![install](/assets/ios-jb-detect-bypass/02_install.png) | ![run1](/assets/ios-jb-detect-bypass/03_jbd.png)
 
 
+
+
 Let us analyze the application executable in hopper disassembler. Find the application executable location.
 
 ![jbDetectPath](/assets/ios-jb-detect-bypass/04_binpath.png)
@@ -141,6 +143,8 @@ There are several tweaks available in cydia which allows to bypass jailbreak det
 | Shadow| [Jolano's Repo](https://ios.jjolano.me/)| iOS 8.0 - 12.1.2 |
 | Liberty Lite | [Ryley's Repo](http://ryleyangus.com/repo/)| iOS 11 - 12 |
 | UnSub | [Nepeta Repo Mirror](http://nepeta.ignition.fun) | iOS 9 - 12|
+
+
 
 
 Lets install and test the Liberty Lite tweak to see whether it is able to bypass our simple jailbreak detection.
