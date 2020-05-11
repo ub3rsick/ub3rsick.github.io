@@ -415,4 +415,4 @@ We can see the request and its response in frida console log.
 OTP verification request and response.
 ![VerOTPReqResp](/assets/ios_hook_nsurlsession/dataTaskWithRequest._validateOTP.png)
 
-**_PS: Tests are done from outside the country (INDIA), the application api's may geo restricted to INDIA only. This would explain the HTTP 403 Forbidden responses._**
+**_PS: Tests are done from outside the country (INDIA), the application api's may be geo restricted to INDIA only. This would explain the HTTP 403 Forbidden responses._**
