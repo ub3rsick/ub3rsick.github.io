@@ -63,6 +63,7 @@ script = session.create_script(classnames)
 script.load()
 ```
 The script lists all the class names in the application. We are interested only in Objective C classes used for HTTP/HTTPS requests such as **NSURLConnection** and **NSURLSesssion**. To filter out only the output of the python script and run it through grep.
+
 `python aarogya_setu.py | grep -iE "nsurlsession|nsurlconnection"`
 
 ```
@@ -186,7 +187,9 @@ ObjC.Object(args[2]).URL().absoluteString()
         });
 ```
 Use frida to load the javascript file to the application.
+
 `frida -l aarogya_setu.js -f "in.nic.arogyaSetu" -U --no-pause`
+
 ![uploadTaskWithRequest_URL](/assets/ios_hook_nsurlsession/uploadTaskWithRequest_URL.png)
 
 We can now see that the instance method issending a request to one firebase logging end point.
@@ -213,7 +216,9 @@ Similar to the previous one, attach to the instance method and log URL from NSUR
 
 ```
 Load the modified javascript file to the application.
+
 `frida -l aarogya_setu.js -f "in.nic.arogyaSetu" -U --no-pause`
+
 ![downloadTaskWithRequest_URL](/assets/ios_hook_nsurlsession/downloadTaskWithRequest_URL.png)
 
 In addition to the firebase loggin request, we are now able to see request to crashlytics.
@@ -272,7 +277,9 @@ The instance method interceptor implementation is similar to previous ones, exce
 
 ```
 Load the modified javascript file to the application.
+
 `frida -l aarogya_setu.js -f "in.nic.arogyaSetu" -U --no-pause`
+
 ![dataTaskWithRequest_requests_response_URL](/assets/ios_hook_nsurlsession/dataTaskWithRequest_requests_response_URL.png)
 
 We can now see other requests originating from the application and their responses as well. We see a request to the following URL:
@@ -390,15 +397,18 @@ if(ObjC.available){
 ```
 
 **Submitting OTP generation request:**
-![OTPGen](/assets/ios_hook_nsurlsession/gen_otp.PNG)
-![OTPGen2](/assets/ios_hook_nsurlsession/gen_otp.PNG =320x568)
+
+
+![OTPGen](/assets/ios_hook_nsurlsession/gen_otp_50.PNG)
 
 We can see the request and its response in frida console log.
 ![GenOTPReq](/assets/ios_hook_nsurlsession/dataTaskWithRequest_gen_otp.png)
 
 **Submitting OTP for verification:**
-![ver_otp](/assets/ios_hook_nsurlsession/ver_otp.PNG)
-![ver_otp2](/assets/ios_hook_nsurlsession/ver_otp.PNG =320x568)
+
+
+![ver_otp](/assets/ios_hook_nsurlsession/ver_otp_50.PNG)
+
 
 OTP verification request and response.
 ![VerOTPReqResp](/assets/ios_hook_nsurlsession/dataTaskWithRequest._validateOTP.png)
