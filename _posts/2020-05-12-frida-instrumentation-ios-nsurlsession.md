@@ -388,3 +388,17 @@ if(ObjC.available){
         });
 }
 ```
+
+**Submitting OTP generation request:**
+![OTPGen](/assets/ios_hook_nsurlsession/gen_otp.PNG)
+![OTPGen2](/assets/ios_hook_nsurlsession/gen_otp.PNG =320x568)
+
+We can see the request and its response in frida console log.
+![GenOTPReq](/assets/ios_hook_nsurlsession/dataTaskWithRequest_gen_otp.png)
+
+**Submitting OTP for verification:**
+![ver_otp](/assets/ios_hook_nsurlsession/ver_otp.PNG)
+![ver_otp2](/assets/ios_hook_nsurlsession/ver_otp.PNG =320x568)
+
+OTP verification request and response.
+![VerOTPReqResp](/assets/ios_hook_nsurlsession/dataTaskWithRequest._validateOTP.png)
