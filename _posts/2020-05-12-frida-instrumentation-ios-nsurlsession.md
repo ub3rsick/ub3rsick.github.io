@@ -41,7 +41,7 @@ Our test subject is [Aarogya Setu](https://apps.apple.com/in/app/aarogyasetu/id1
 **Disclaimer:** The selection of application has nothing to do with any of the heated verbal exchanges happening in social media.
 
 ## Dumping Class Names
-```
+```python
 # Author: Rizal Muhammed [UB3RSiCK]
 # Date: 11 May 2020
 
@@ -177,7 +177,7 @@ ObjC.Object(args[2]).URL().absoluteString()
 ```
 >> ObjC.Object(ptr) - tells frida to treat the ptr as an Objective C instance/object so that we can access its properties and methods. In this case, we need to access the properties and methods of NSURLRequest.
 
-```
+```javascript
 		var method = ObjC.classes.NSURLSession["- uploadTaskWithRequest:fromData:completionHandler:"];
         Interceptor.attach(method.implementation, {
                 onEnter: function(args){
@@ -185,6 +185,12 @@ ObjC.Object(args[2]).URL().absoluteString()
                 }
         });
 ```
+Use frida to load the javascript file to the application.
+`frida -l aarogya_setu.js -f "in.nic.arogyaSetu" -U --no-pause`
+![uploadTaskWithRequest_URL](/assets/ios_hook_nsurlsession/uploadTaskWithRequest_URL.png)
+
+We can now see that the instance method issending a request to one firebase logging end point.
+
 ## -[NSURLSession downloadTaskWithRequest: completionHandler:]
 frida-trace generated handler:
 
@@ -197,7 +203,7 @@ Reference: [https://developer.apple.com/documentation/foundation/nsurlsession/14
         completionHandler:(void (^)(NSURL *location, NSURLResponse *response, NSError *error))completionHandler;
 ```
 Similar to the previous one, attach to the instance method and log URL from NSURLRequest object.
-```
+```javascript
         var downloadTaskWithRequestMethod = ObjC.classes.NSURLSession["- downloadTaskWithRequest:completionHandler:"];
         Interceptor.attach(downloadTaskWithRequestMethod.implementation, {
                 onEnter: function(args){
@@ -206,6 +212,12 @@ Similar to the previous one, attach to the instance method and log URL from NSUR
         });
 
 ```
+Load the modified javascript file to the application.
+`frida -l aarogya_setu.js -f "in.nic.arogyaSetu" -U --no-pause`
+![downloadTaskWithRequest_URL](/assets/ios_hook_nsurlsession/downloadTaskWithRequest_URL.png)
+
+In addition to the firebase loggin request, we are now able to see request to crashlytics.
+
 ## -[NSURLSession dataTaskWithRequest: completionHandler:]
 frida-trace generated handler:
 
@@ -218,7 +230,7 @@ Reference: [https://developer.apple.com/documentation/foundation/nsurlsession/14
         completionHandler:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completionHandler;
 ```
 The instance method interceptor implementation is similar to previous ones, except we will hook completion handler as well to display the response.
-```
+```javascript
         // args[2] = dataTaskWithRequest: NSURLRequest
         // args[3] = completionHandler:
         var dataTaskWithRequestMethod = ObjC.classes.NSURLSession["- dataTaskWithRequest:completionHandler:"];
@@ -259,9 +271,19 @@ The instance method interceptor implementation is similar to previous ones, exce
         });
 
 ```
+Load the modified javascript file to the application.
+`frida -l aarogya_setu.js -f "in.nic.arogyaSetu" -U --no-pause`
+![dataTaskWithRequest_requests_response_URL](/assets/ios_hook_nsurlsession/dataTaskWithRequest_requests_response_URL.png)
+
+We can now see other requests originating from the application and their responses as well. We see a request to the following URL:
+
+`https://fp.swaraksha.gov.in/api/v1/app/config`
+
+we can also see the response for this request as well. Unfortunately it is an **HTTP 403 Forbidden** response.
+
 ## Putting It All Together
 The complete hooking script.
-```
+```javascript
 // Author: Rizal Muhammed [UB3RSiCK]
 // Date: 11 May 2020
 // Desc: Frida script to intercept Aarogya Setu iOS App NSURLSession instance methods
