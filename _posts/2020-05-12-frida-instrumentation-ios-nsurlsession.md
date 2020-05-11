@@ -200,6 +200,7 @@ frida-trace generated handler:
 ![downloadTaskWithRequestHandler](/assets/ios_hook_nsurlsession/downloadTaskWithRequest_handler.png)
 
 The definition of the instance method:
+
 Reference: [https://developer.apple.com/documentation/foundation/nsurlsession/1411511-downloadtaskwithrequest?language=objc](https://developer.apple.com/documentation/foundation/nsurlsession/1411511-downloadtaskwithrequest?language=objc)
 ```
 - (NSURLSessionDownloadTask *)downloadTaskWithRequest:(NSURLRequest *)request 
@@ -229,6 +230,7 @@ frida-trace generated handler:
 ![dataTaskWithRequestHandler](/assets/ios_hook_nsurlsession/dataTaskWithRequest_handler.png)
 
 The definition of the instance method:
+
 Reference: [https://developer.apple.com/documentation/foundation/nsurlsession/1407613-datataskwithrequest](https://developer.apple.com/documentation/foundation/nsurlsession/1407613-datataskwithrequest)
 ```
 - (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request 
@@ -412,3 +414,5 @@ We can see the request and its response in frida console log.
 
 OTP verification request and response.
 ![VerOTPReqResp](/assets/ios_hook_nsurlsession/dataTaskWithRequest._validateOTP.png)
+
+**_PS: Tests are done from outside the country (INDIA), the application api's may geo restricted to INDIA only. This would explain the HTTP 403 Forbidden responses._**
