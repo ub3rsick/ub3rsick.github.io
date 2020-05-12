@@ -24,8 +24,11 @@ local                                     local   Local System
 tcp                                       remote  Local TCP
 ```
 The test iOS device is the one connected via USB. To list all the installed applications on the device, run `frida-ps -Uia`.
+
 `-U`: Tell frida to connect to USB Device
+
 `-a`: List only applications
+
 `-i`: Include all installed applications
 
 
@@ -62,7 +65,7 @@ session = device.attach(pid)
 script = session.create_script(classnames)
 script.load()
 ```
-The script lists all the class names in the application. We are interested only in Objective C classes used for HTTP/HTTPS requests such as **NSURLConnection** and **NSURLSesssion**. To filter out only the output of the python script and run it through grep.
+The script lists all the class names in the application. We are interested only in Objective C classes used for HTTP/HTTPS requests such as **NSURLConnection** and **NSURLSession**. To filter out only the output of the python script and run it through grep.
 
 `python aarogya_setu.py | grep -iE "nsurlsession|nsurlconnection"`
 
@@ -108,6 +111,7 @@ frida-trace -f in.nic.arogyaSetu -m "*[NSURLSession *]" -U
 -m OBJC_METHOD, --include-objc-method=OBJC_METHOD
 ```
 iOS methods syntax: **+/-[ClassName function/methodname]**
+
 The above frida-trace command will trace every class and instance methods of **NSURLSession** class.
 
 - Intercept Objective C methods (-m)
@@ -284,7 +288,7 @@ Load the modified javascript file to the application.
 
 ![dataTaskWithRequest_requests_response_URL](/assets/ios_hook_nsurlsession/dataTaskWithRequest_requests_response_URL.png)
 
-We can now see other requests originating from the application and their responses as well. We see a request to the following URL:
+We can now see other requests originating from the application and their responses as well. We see a request to the following API endpoint:
 
 `https://fp.swaraksha.gov.in/api/v1/app/config`
 
