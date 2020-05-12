@@ -13,7 +13,7 @@ Tracing iOS NSURLSession instance methods and instrumenting those methods to log
 - Acheive above objectives only using frida (No reversing, traffic interception via web proxy)
 
 
-## Identify The Target Application Name and Identifier
+## Identify the Target Application Name and Identifier
 Listing all the connected devices: `frida-ls-devices`
 ```
 (objEnv) kali@kali:~/Desktop/BipBupBop/Frida$ frida-ls-devices
