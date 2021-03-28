@@ -86,7 +86,7 @@ We can avoid using underscore `_` in desc parameter by defining a new GET parame
 
 ![wc11](/assets/playsecure2021/wc11.png)
 
-```
+```python
 POST /generate?class=__class__ HTTP/1.1
 Host: web.ps.ctf.ae:8882
 Content-Length: 92
