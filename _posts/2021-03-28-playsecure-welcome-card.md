@@ -21,10 +21,13 @@ Interacting with the web application to understand its functionality. The web ap
 ![wc00](/assets/playsecure2021/wc00.png)
 
 Filling in all required fields and submitting the form, we get a welcome card.
+
 ![wc01](/assets/playsecure2021/wc01.png)
 
 ### Testing for Template Injection
+
 Injecting basic template injection payloads such as  `{{9*9}}`.
+
 ![wc02](/assets/playsecure2021/wc02.png)
 
 We see that the description field is vulnerable to SSTI. 
