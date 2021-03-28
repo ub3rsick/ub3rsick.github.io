@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Playsecure - Point To The Stars
+title: Playsecure CTF 2021 - Point To The Stars
 ---
 ### Challenge Description
 
