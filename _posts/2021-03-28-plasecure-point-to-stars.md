@@ -2,7 +2,7 @@
 layout: post
 title: Playsecure - Point To The Stars
 ---
-## Challenge Description
+### Challenge Description
 
 Can you point to the stars? Make the pointer point to the flag!
 
