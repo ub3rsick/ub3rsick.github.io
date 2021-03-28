@@ -14,17 +14,31 @@ Connect to the challenge at exploitation.ps.ctf.ae:5454
 
 ![pts00](/assets/playsecure2021/pts00.png)
 
+1. Flag Address
+2. Current Address of star pointer
+3. User Input
+4. New star pointer
+
 ### Overwriting the star pointer
 
 Sending a string of length 100 will overwrite the star pointer.
 
 ![pts01](/assets/playsecure2021/pts01.png)
 
+Star pointer overwritten with 8 A's.
+
 ### Controlling the star pointer
 
 We enter a unique pattern of 100 length as the wish. Find the offset at which the star pointer is getting overwritten.
 
 ![pts02](/assets/playsecure2021/pts02.png)
+
+1. Generating unique pattern with MSF pattern_create.rb
+2. Sending unique pattern
+3. New star pointer address which is overwritten with the unique pattern
+4. Finding the offset -> 72
+5. Sending 72 A's + 8 B's as wish to confirm control over star pointer.
+6. Star pointer overwritten with 8 B's
 
 ### Approach to Exploitation
 
