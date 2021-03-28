@@ -9,9 +9,6 @@ The flag is well...somewhere. Find it on the system! It's still called flag.txt.
 
 Challenge: http://web.ps.ctf.ae:8882/
 
-_Difficulty_: **Medium**
-_Category_: **Web**
-
 <!-- more -->
 
 ### Recon
@@ -281,4 +278,4 @@ firstName=a&lastName=b&desc={% set string = "abc" %}{% set cls = string|attr(req
 
 ```
 
-_FLAG: CTFAE{ASurpriseToBeSureButAWelcomeOne}_
+*FLAG: CTFAE{ASurpriseToBeSureButAWelcomeOne}*
