@@ -35,7 +35,7 @@ Reproducing the same using burp repeater.
 
 ![wc04](/assets/playsecure2021/wc04.png)
 
-1. Submitting `{{3*3}}` in desc parameter.
+1. Submitting <pre><code>{{3*3}}</code></pre> in desc parameter.
 2. We get 9 in response.
 
 The desc POST parameter is vulnerable to SSTI.
