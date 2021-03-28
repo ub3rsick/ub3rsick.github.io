@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Playsecure to The Stars
+title: Playsecure - Point To The Stars
 ---
 
 Can you point to the stars? Make the pointer point to the flag!
@@ -8,8 +8,6 @@ Can you point to the stars? Make the pointer point to the flag!
 Connect to the challenge at exploitation.ps.ctf.ae:5454
 
 <!-- more -->
-
-## Recon
 
 ### Connecting to challenge server and interacting.
 
