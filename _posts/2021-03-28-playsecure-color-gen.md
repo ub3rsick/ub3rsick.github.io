@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Playsecure - Color Generator
+title: Playsecure CTF - Color Generator
 ---
 ### Challenge Description
 
