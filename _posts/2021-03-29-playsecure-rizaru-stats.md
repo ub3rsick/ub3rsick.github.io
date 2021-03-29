@@ -20,5 +20,5 @@ Challenges which I was able to solve in playsecure CTF and the scoring, rank etc
 
 ### Rizaru Solved Challenges
 
-![solved](/assets/playsecure2021/rizaru-solved.png)
+![solved](/assets/playsecure2021/rizaru-solved2.png)
 
