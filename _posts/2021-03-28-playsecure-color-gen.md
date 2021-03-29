@@ -111,7 +111,7 @@ Both are same. So we can use this method to exfiltrate all flag contents. I'm as
 3. Converts the flag characters color code to string using the dictionary from step 1
 4. Print flag.
 
-```python3
+```python
 # Author: Rizal Muhammed ~ rizaru ~ UB3RSiCK
 # Date: 27 March 2021
 # Desc: Playsecure ctf Color Generator exploitation solution
