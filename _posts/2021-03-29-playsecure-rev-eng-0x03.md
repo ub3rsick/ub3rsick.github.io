@@ -42,7 +42,7 @@ We set breakpoint at both.
 
 **Dis-assembling main and check functions:**
 
-```
+```nasm
 gdb-peda$ disas main
 Dump of assembler code for function main:
    0x0000000000001198 <+0>:	push   rbp
