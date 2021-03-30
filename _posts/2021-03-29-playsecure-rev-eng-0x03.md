@@ -1,6 +1,10 @@
 ---
 layout: post
 title: Playsecure CTF 2021 - Reverse Engineering - 0x03
+tags:
+  - CTF
+  - Reverse Engineering
+  - GDB
 ---
 ### Challenge Description
 
